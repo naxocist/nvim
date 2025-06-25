@@ -4,7 +4,21 @@
 
 local opt = vim.opt
 
-opt.clipboard = vim.env.SSH_TTY and "" or "unnamedplus" -- Sync with system clipboard
+-- Sync with system clipboard
+opt.clipboard = "unnamedplus" 
+vim.g.clipboard = {
+   name = 'WslClipboard',
+   copy = {
+      ['+'] = 'clip.exe',
+      ['*'] = 'clip.exe',
+    },
+   paste = {
+      ['+'] = 'powershell.exe -NoLogo -NoProfile -c [Console]::Out.Write($(Get-Clipboard -Raw).tostring().replace("`r", ""))',
+      ['*'] = 'powershell.exe -NoLogo -NoProfile -c [Console]::Out.Write($(Get-Clipboard -Raw).tostring().replace("`r", ""))',
+   },
+   cache_enabled = 0,
+}
+
 opt.completeopt = "menu,menuone,noselect"
 opt.cursorline = false -- Enable highlighting of the current line
 opt.scrolloff = 10 -- Lines of context

@@ -15,6 +15,8 @@ map("n", "-", "<C-x>")
 -- Select all
 map("n", "<C-a>", "gg<S-v>G")
 
+-- Copy selection to clipboard
+map("v", "y", "\"+y<cr>")
 
 -- Save
 map({ "x", "n", "s" }, "<C-s>", "<cmd>w<cr><esc>")

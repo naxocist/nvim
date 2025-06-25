@@ -38,5 +38,13 @@ return {
       vim.keymap.set("n", "<C-S-j>", function() harpoon:list():prev() end)
       vim.keymap.set("n", "<C-S-k>", function() harpoon:list():next() end)
     end
-  }
+  },
+
+  -- Auto close parentheses and repeat by dot dot dot...
+  { "cohama/lexima.vim" },
+
+  -- Indentation guides
+  { 'echasnovski/mini.indentscope', version = '*', 
+    opts = {} 
+  },
 }
