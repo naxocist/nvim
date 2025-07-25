@@ -11,14 +11,16 @@ return {
   -- },
 
   {
-    "vague2k/vague.nvim",
+    "rose-pine/neovim",
+    name = "rose-pine",
     config = function()
-      -- NOTE: you do not need to call setup if you don't want to.
-      require("vague").setup {
-        italic = false
+      require("rose-pine").setup {
+        styles = {
+          italic = false
+        }
       }
-
-      vim.cmd "color vague"
+      -- vim.cmd "color rose-pine"
+      vim.cmd "color sorbet"
     end
   },
 

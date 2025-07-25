@@ -8,7 +8,7 @@ local opt = vim.opt
 opt.clipboard = "unnamedplus" 
 
 opt.completeopt = "menu,menuone,noselect"
-opt.cursorline = true -- enable highlighting of the current line
+opt.cursorline = false -- enable highlighting of the current line
 opt.scrolloff = 10
 opt.signcolumn = "yes" -- always show the signcolumn, otherwise it would shift the text each time
 opt.number = true
@@ -31,4 +31,5 @@ opt.splitbelow = true -- Put new windows below current
 opt.splitright = true -- Put new windows below current
 
 opt.ignorecase = true -- make cmds & search case insensitive
+opt.wrap = false
 

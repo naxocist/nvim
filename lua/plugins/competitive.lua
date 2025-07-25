@@ -74,7 +74,7 @@ return {
 
       {
         "<leader>i",
-        string.format(":vsplit %s<CR>", input_path),
+        string.format(":50vsplit %s<CR>", input_path),
         desc = "Open input.txt",
       },
     },

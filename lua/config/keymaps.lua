@@ -61,3 +61,10 @@ map("i", "<C-s>", function()
     vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<cmd>w<cr><esc>", true, false, true), "n", false)
   end
 end)
+
+
+-- toggle line wrap
+map("n", "<leader>ww", function()
+  vim.wo.wrap = not vim.wo.wrap
+end, { desc = "Toggle line wrap" })
+
