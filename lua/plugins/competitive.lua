@@ -2,30 +2,6 @@ local input_path = "~/.config/nvim/lua/plugins/cp_input.txt"
 
 return {
   {
-    "A7lavinraj/assistant.nvim",
-    lazy = false,
-    keys = {
-      { "<leader>c", "<cmd>Assistant<cr>"}
-    },
-    opts = {
-      commands = {
-        cpp = {
-          compile = {
-            args = { "$FILENAME_WITH_EXTENSION", "-o", "$FILENAME_WITHOUT_EXTENSION.exe"},
-          },
-          execute = {
-            main = "bash",
-            args = {"-c", "./$FILENAME_WITHOUT_EXTENSION.exe"}
-          },
-        }
-      },
-      core = {
-        process_budget = 3000,
-      }
-    }
-  },
-
-  {
     "akinsho/toggleterm.nvim",
     version = "*",
     config = true,
@@ -102,5 +78,5 @@ return {
         desc = "Open input.txt",
       },
     },
-  }
+  },
 }

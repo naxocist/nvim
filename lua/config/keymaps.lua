@@ -15,24 +15,14 @@ map("n", "-", "<C-x>")
 -- Select all
 map("n", "<C-a>", "gg<S-v>G")
 
--- Copy selection to clipboard
-map("v", "y", "\"+y<cr>")
+-- delete a word
+map("i", "<C-h>", "<C-w>")
 
--- Save
-map({ "x", "n", "s" }, "<C-s>", "<cmd>w<cr><esc>")
-map("i", "<C-s>", function()
-  local buftype = vim.bo.buftype
-
-  if buftype ~= "" then
-    vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<esc>", true, false, true), "n", false)
-    vim.schedule(function()
-      vim.notify("Cannot save. buftype is set to: " .. buftype, vim.log.levels.WARN)
-    end)
-  else
-    vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<cmd>w<cr><esc>", true, false, true), "n", false)
-  end
-end)
-
+-- undo / redo
+map("n", "<C-z>", "u", opts)
+map("n", "<C-y>", "<C-r>", opts)
+map("i", "<C-z>", "<C-o>u", opts)
+map("i", "<C-y>", "<C-o><C-r>", opts)
 
 -- Tabs
 map("n", "te", ":tabedit")
@@ -56,3 +46,18 @@ map("v", "<", "<gv")
 map("v", ">", ">gv")
 map("n", "<", "<<")
 map("n", ">", ">>")
+
+-- Save
+map({ "x", "n", "s" }, "<C-s>", "<cmd>w<cr><esc>")
+map("i", "<C-s>", function()
+  local buftype = vim.bo.buftype
+
+  if buftype ~= "" then
+    vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<esc>", true, false, true), "n", false)
+    vim.schedule(function()
+      vim.notify("Cannot save. buftype is set to: " .. buftype, vim.log.levels.WARN)
+    end)
+  else
+    vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<cmd>w<cr><esc>", true, false, true), "n", false)
+  end
+end)
