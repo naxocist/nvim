@@ -4,8 +4,8 @@
 
 local opt = vim.opt
 
--- sync with system clipboard 
-opt.clipboard = "unnamedplus" 
+-- sync with system clipboard (xclip)
+opt.clipboard = "unnamedplus"
 
 opt.completeopt = "menu,menuone,noselect"
 opt.cursorline = false -- enable highlighting of the current line
@@ -26,10 +26,21 @@ opt.termguicolors = true -- True color support
 
 opt.smartcase = true -- Don't ignore case with capitals
 opt.smartindent = true -- Insert indents automatically
-opt.list = true -- Show some invisible characters (tabs...
+opt.list = true -- show invisible characters
+opt.listchars = {
+  tab = "→ ",
+  trail = "·",
+  nbsp = "␣",
+}
+opt.conceallevel = 0 -- show invisible characters when select text
+
 opt.splitbelow = true -- Put new windows below current
 opt.splitright = true -- Put new windows below current
 
 opt.ignorecase = true -- make cmds & search case insensitive
 opt.wrap = false
 
+-- Set up diagnostics
+vim.diagnostic.config({
+  virtual_lines = true
+})
