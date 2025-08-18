@@ -6,11 +6,9 @@ return {
       require("rose-pine").setup {
         styles = {
           italic = false,
-          transparency = true
+          transparency = false
         }
       }
-
-      vim.cmd "color rose-pine"
 
       -- ## THEME LIKE GVIM default ##
       -- vim.cmd "color morning"
@@ -35,14 +33,5 @@ return {
       -- end
     end
   },
-
-  -- {
-  --   "andweeb/presence.nvim",
-  --   opts = {
-  --     neovim_image_text = "go checkout love live!",
-  --     editing_text        = "Yapping in ****",
-  --     file_explorer_text  = "Searching in a void",
-  --   }
-  -- }
 }
 

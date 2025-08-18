@@ -6,7 +6,8 @@ return {
   config = function()
     require "nvim-treesitter.configs".setup {
       ensure_installed = {"c", "cpp", "python", "lua", "vim", "markdown"},
-      auto_install = true
+      auto_install = true,
+      highlight = { enable = true }
     }
   end
 }
