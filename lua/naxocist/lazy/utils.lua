@@ -1,21 +1,5 @@
 return {
   -- file tree
-  {
-    "echasnovski/mini.files",
-    version = false,
-    config = function()
-      require('mini.files').setup()
-      vim.keymap.set("n", "<leader>e", "<cmd>lua MiniFiles.open()<cr>")
-    end
-  },
-
-  -- Auto close parentheses and repeat by dot dot dot...
-  { "cohama/lexima.vim" },
-
-  -- Indentation guides
-  { "echasnovski/mini.indentscope", version = "*",
-    opts = {}
-  },
 
   {
     "folke/flash.nvim",

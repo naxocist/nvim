@@ -2,9 +2,6 @@ require("naxocist.set")
 require("naxocist.remap")
 require("naxocist.lazy_init")
 
-
--- local augroup = vim.api.nvim_create_augroup
--- local TheNaxocistGroup = augroup("Naxocist", {})
 local function augroup(name)
   return vim.api.nvim_create_augroup("lazyvim_" .. name, { clear = true })
 end
