@@ -12,6 +12,7 @@ return {
       })
 
       vim.lsp.config.clangd = {
+        root_markers = { ".clangd", "compile_commands.json" },
         cmd = {
           "clangd",
           "--clang-tidy",
@@ -19,14 +20,15 @@ return {
           "--offset-encoding=utf-8",
           "--header-insertion=never"
         },
-        root_markers = { ".clangd", "compile_commands.json" },
         filetypes = { "c", "cpp" },
       }
 
       require("mason-lspconfig").setup {
-        ensure_installed = { "lua_ls", "rust_analyzer", "ts_ls", "pyright", "clangd", "gopls" }
+        ensure_installed = { "lua_ls", "rust_analyzer", "clangd",
+          "gopls", "pyright", "jsonnet_ls", "yamlls", "html", "cssls", "ts_ls" }
       }
 
+      vim.keymap.set("n", "<leader>dd", "<cmd> lua vim.diagnostic.open_float() <cr>")
     end
   },
 
@@ -67,6 +69,11 @@ return {
   },
 
   {
+    "esmuellert/nvim-eslint",
+    opts = {}
+  },
+
+  {
     "folke/lazydev.nvim",
     ft = "lua", -- only load on lua files
     opts = {
@@ -75,5 +82,23 @@ return {
       },
     },
   },
-}
 
+  {
+    "luckasRanarison/tailwind-tools.nvim",
+    event = "VeryLazy",
+    name = "tailwind-tools",
+    build = ":UpdateRemotePlugins",
+    dependencies = {
+      "nvim-treesitter/nvim-treesitter",
+      "nvim-telescope/telescope.nvim", -- optional
+      "neovim/nvim-lspconfig",         -- optional
+    },
+    opts = {
+      keymaps = {
+        smart_increment = {
+          enabled = false
+        }
+      }
+    }
+  }
+}

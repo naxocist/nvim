@@ -1,6 +1,8 @@
 vim.g.mapleader = " "
 vim.g.maplocalleader = "\\"
 
+-- Select all
+vim.keymap.set("n", "<C-a>", "<esc>ggVG")
 
 vim.keymap.set("n", "J", "mzJ`z")
 vim.keymap.set("n", "<C-d>", "<C-d>zz")
@@ -9,35 +11,21 @@ vim.keymap.set("n", "n", "nzzzv")
 vim.keymap.set("n", "N", "Nzzzv")
 vim.keymap.set("n", "=ap", "ma=ap'a")
 
--- execute lua file
-vim.keymap.set("n", "<leader>x", "<cmd>.lua<cr>")
-vim.keymap.set("n", "<leader><leader>x", "<cmd>source %<cr>")
-
-
 -- move line
 vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv")
 vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv")
 
-
 -- remove highlighting
 vim.keymap.set("n", "<esc>", "<cmd>noh<cr>")
 
-
 -- do not copy single character deletion
 vim.keymap.set("n", "x", '"_x')
-
 
 -- Increment / Decrement
 vim.keymap.set("n", "+", "<C-a>")
 vim.keymap.set("n", "-", "<C-x>")
 
-
--- Select all
-vim.keymap.set("n", "<C-a>", "gg<S-v>G")
-
-
 -- undo / redo
-vim.keymap.set("n", "<C-z>", "u")
 vim.keymap.set("n", "<C-y>", "<C-r>")
 vim.keymap.set("i", "<C-z>", "<C-o>u")
 vim.keymap.set("i", "<C-y>", "<C-o><C-r>")
@@ -47,16 +35,11 @@ vim.keymap.set("i", "<C-y>", "<C-o><C-r>")
 vim.keymap.set("n", "Sh", ":split<cr>")
 vim.keymap.set("n", "Sv", ":vsplit<cr>")
 
-
+-- Resize window
 vim.keymap.set("n", "<A-,>", "<C-w>5>")
 vim.keymap.set("n", "<A-.>", "<C-w>5<")
 vim.keymap.set("n", "<A-t>", "<C-w>+")
 vim.keymap.set("n", "<A-s>", "<C-w>-")
-
-
-vim.keymap.set("n", "<S-h>", "<cmd>bprevious<cr>")
-vim.keymap.set("n", "<S-l>", "<cmd>bnext<cr>")
-
 
 vim.keymap.set("v", "<", "<gv")
 vim.keymap.set("v", ">", ">gv")
@@ -87,5 +70,4 @@ end
 
 vim.keymap.set("n", "<leader>ww", function() toggle "wrap" end)
 vim.keymap.set("n", "<leader>nn", function() toggle "relativenumber" end)
-vim.keymap.set("n", "<leader>q", "<cmd>q<cr>")
-
+vim.keymap.set("n", "q", "<cmd>q<cr>")

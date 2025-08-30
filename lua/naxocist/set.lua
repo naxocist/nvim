@@ -1,5 +1,6 @@
 vim.opt.clipboard = "unnamedplus" -- use system clipboard
 
+vim.opt.updatetime = 500
 
 vim.opt.scrolloff = 10
 vim.opt.signcolumn = "yes"
@@ -25,7 +26,7 @@ vim.opt.modeline = false
 vim.opt.conceallevel = 2
 
 vim.opt.completeopt = "menu,menuone,noselect"
-vim.opt.termguicolors = true -- True color
+vim.opt.termguicolors = true
 
 
 vim.opt.list = true -- show invisible characters
@@ -40,4 +41,3 @@ vim.diagnostic.config({
   virtual_text = true,
   virtual_lines = false
 })
-

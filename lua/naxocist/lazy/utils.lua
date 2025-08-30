@@ -1,6 +1,4 @@
 return {
-  -- file tree
-
   {
     "folke/flash.nvim",
     event = "VeryLazy",
@@ -14,4 +12,40 @@ return {
     },
   },
 
+  -- {
+  --   "windwp/nvim-ts-autotag",
+  --   opts = {
+  --     opts = {
+  --       -- Defaults
+  --       enable_close = true, -- Auto close tags
+  --       enable_rename = true, -- Auto rename pairs of tags
+  --       enable_close_on_slash = false -- Auto close on trailing </
+  --     },
+  --     -- Also override individual filetype configs, these take priority.
+  --     -- Empty by default, useful if one of the "opts" global settings
+  --     -- doesn't work well in a specific filetype
+  --     -- per_filetype = {
+  --     --   ["html"] = {
+  --     --     enable_close = false
+  --     --   }
+  --     -- }
+  --   }
+  -- }
+
+  {
+    "tronikelis/ts-autotag.nvim",
+    opts = {
+      auto_rename = {
+        enabled = true
+      }
+    },
+    event = "VeryLazy",
+  },
+
+  {
+    "folke/ts-comments.nvim",
+    opts = {},
+    event = "VeryLazy",
+    enabled = vim.fn.has("nvim-0.10.0") == 1,
+  }
 }
