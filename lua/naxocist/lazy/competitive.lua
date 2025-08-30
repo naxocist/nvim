@@ -1,106 +1,69 @@
-local function augroup(name)
-  return vim.api.nvim_create_augroup("lazyvim_" .. name, { clear = true })
-end
+local input_file = "/home/naxocist/.config/nvim/lua/naxocist/lazy/cp_input.txt"
+local terminal_bufnr = nil
+local terminal_winid = nil
+local term_height = 10
 
--- ~/.config/nvim/lua/naxocist/run.lua
-local M = {}
-
-local input_path = "/home/naxocist/.config/nvim/lua/naxocist/lazy/cp_input.txt"
-local run_bufnr = nil
-local run_winid = nil
-local run_jobid = nil
-
--- Utility: safely write cp_input.txt if modified
-local function save_input()
-  local input_buf = vim.fn.bufnr(input_path)
-  if input_buf ~= -1 and vim.api.nvim_buf_is_loaded(input_buf) then
-    if vim.api.nvim_buf_get_option(input_buf, "modified") then
-      vim.api.nvim_buf_call(input_buf, function()
-        vim.cmd("write")
-      end)
+-- Toggle input file in vertical split
+local function toggle_input()
+  for _, win in ipairs(vim.api.nvim_tabpage_list_wins(0)) do
+    local buf = vim.api.nvim_win_get_buf(win)
+    local buf_name = vim.api.nvim_buf_get_name(buf)
+    if buf_name == input_file then
+      vim.api.nvim_win_close(win, true)
+      return
     end
   end
+  vim.cmd("vsplit " .. input_file)
 end
 
--- Kill process if still running
-local function kill_job()
-  if run_jobid and run_jobid > 0 then
-    vim.fn.jobstop(run_jobid)
-    run_jobid = nil
-  end
-end
-
--- Close + wipe terminal buffer
-local function close_and_wipe()
-  kill_job()
-
-  if run_winid and vim.api.nvim_win_is_valid(run_winid) then
-    vim.api.nvim_win_close(run_winid, true)
-  end
-
-  if run_bufnr and vim.api.nvim_buf_is_valid(run_bufnr) then
-    vim.api.nvim_buf_delete(run_bufnr, { force = true })
-  end
-
-  run_bufnr = nil
-  run_winid = nil
-end
-
--- Run code in a horizontal terminal
-local run_code = function()
-  save_input()
-
-  local filename = vim.fn.expand("%:t")
-  local filename_noext = vim.fn.expand("%:r")
-  local ext = vim.fn.expand("%:e")
-  local cmd = ""
-
-  if ext == "cpp" then
-    cmd = string.format("g++ %s -o %s.exe && ./%s.exe < %s", filename, filename_noext, filename_noext, input_path)
-  elseif ext == "py" then
-    cmd = string.format("python3 %s < %s", filename, input_path)
-  else
-    vim.notify("Unsupported filetype: " .. ext)
+-- Compile and run current C++ file
+local function run_cpp()
+  local file_path = vim.api.nvim_buf_get_name(0)
+  if not file_path:match("%.cpp$") then
+    print("Not a C++ file!")
     return
   end
 
-  -- If terminal already open, close + wipe
-  close_and_wipe()
+  local output_file = file_path:gsub("%.cpp$", ".exe")
+  local cmd = string.format("g++ %s -o %s && %s < %s", file_path, output_file, output_file, input_file)
 
-  -- Open a horizontal split
-  vim.cmd("belowright split | resize 15")
-  run_winid = vim.api.nvim_get_current_win()
+  -- Open terminal if not exists
+  if not terminal_bufnr or not vim.api.nvim_buf_is_valid(terminal_bufnr) then
+    terminal_bufnr = vim.api.nvim_create_buf(false, true)
+  end
 
-  -- Create a fresh scratch buffer for terminal
-  run_bufnr = vim.api.nvim_create_buf(false, true)
-  vim.api.nvim_win_set_buf(run_winid, run_bufnr)
+  if not terminal_winid or not vim.api.nvim_win_is_valid(terminal_winid) then
+    vim.cmd(string.format("botright %dsplit", term_height))
+    terminal_winid = vim.api.nvim_get_current_win()
+    vim.api.nvim_win_set_buf(terminal_winid, terminal_bufnr)
+  end
 
-  -- Start terminal job in this buffer
-  run_jobid = vim.fn.termopen({ "bash", "-c", cmd }, {
-    on_exit = function(_, code)
-      run_jobid = nil
-      if code ~= 0 then
-        vim.notify("Process exited with code " .. code, vim.log.levels.ERROR)
+  -- Run command in terminal
+  vim.fn.termopen(cmd, {
+    on_exit = function(_, exit_code, _)
+      if exit_code == 0 then
+        print("Execution finished successfully.")
+      else
+        print("Execution terminated with code: " .. exit_code)
       end
     end,
   })
-
-  -- Enter normal mode immediately
-  vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<C-\\><C-n>", true, false, true), "n", false)
-
-  -- Map q to kill + close + wipe
-  vim.keymap.set("n", "q", function()
-    close_and_wipe()
-  end, { buffer = run_bufnr, silent = true })
 end
 
--- Open cp_input.txt in vertical split
-local open_input = function()
-  vim.cmd(string.format("50vsplit %s", input_path))
-end
+-- Automatically delete terminal buffer when closed
+vim.api.nvim_create_autocmd("BufDelete", {
+  pattern = "*",
+  callback = function()
+    if terminal_bufnr and vim.api.nvim_buf_is_valid(terminal_bufnr) then
+      vim.api.nvim_buf_delete(terminal_bufnr, { force = true })
+      terminal_bufnr = nil
+      terminal_winid = nil
+    end
+  end,
+})
 
--- Keymaps
-vim.keymap.set("n", "<leader>r", run_code, { desc = "Run code with cp_input.txt" })
-vim.keymap.set("n", "<leader>i", open_input, { desc = "Open input.txt" })
 
-return M
+vim.keymap.set("n", "<leader>i", toggle_input, { noremap = true, silent = true })
+vim.keymap.set("n", "<leader>r", run_cpp, { noremap = true, silent = true })
+
+return {}

@@ -9,13 +9,17 @@ return {
   },
 
   -- Indentation guides
-  { "echasnovski/mini.indentscope", version = "*",
+  {
+    "echasnovski/mini.indentscope",
+    version = "*",
     opts = {
 
     }
   },
 
-  { 'echasnovski/mini.pairs', version = '*',
+  {
+    'echasnovski/mini.pairs',
+    version = '*',
     opts = {}
   }
 }

@@ -1,5 +1,5 @@
 -- buffers storage management
-return  {
+return {
   "ThePrimeagen/harpoon",
   branch = "harpoon2",
   dependencies = { "nvim-lua/plenary.nvim" },
@@ -26,4 +26,3 @@ return  {
     vim.keymap.set("n", "<C-S-k>", function() harpoon:list():next() end)
   end
 }
-
