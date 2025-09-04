@@ -1,7 +1,6 @@
 vim.g.mapleader = " "
 vim.g.maplocalleader = "\\"
 
-
 -- Select all
 vim.keymap.set("n", "<C-a>", "<esc>ggVG")
 
@@ -42,16 +41,16 @@ vim.keymap.set("n", "<A-.>", "<C-w>5<")
 vim.keymap.set("n", "<A-t>", "<C-w>+")
 vim.keymap.set("n", "<A-s>", "<C-w>-")
 
--- Navigate through panes
-vim.keymap.set("n", "<c-h>", "<cmd>wincmd h<cr>")
-vim.keymap.set("n", "<c-j>", "<cmd>wincmd j<cr>")
-vim.keymap.set("n", "<c-k>", "<cmd>wincmd k<cr>")
-vim.keymap.set("n", "<c-l>", "<cmd>wincmd l<cr>")
-
 vim.keymap.set("v", "<", "<gv")
 vim.keymap.set("v", ">", ">gv")
 vim.keymap.set("n", "<", "<<")
 vim.keymap.set("n", ">", ">>")
+
+
+-- Save & quit snippet hightlightings
+vim.keymap.set({ "n", "i", "s" }, "<C-s>", function()
+  vim.cmd("w<cr><esc>") -- Save file
+end, { expr = true, desc = "Save and exit snippet mode" })
 
 local function toggle(opt)
   ---@diagnostic disable-next-line: assign-type-mismatch
@@ -62,16 +61,3 @@ end
 vim.keymap.set("n", "<leader>ww", function() toggle "wrap" end)
 vim.keymap.set("n", "<leader>nn", function() toggle "relativenumber" end)
 vim.keymap.set("n", "q", "<cmd>q<cr>")
-
-
--- <C-s>: Save and (if needed) stop the native snippet session so highlights disappear
-vim.keymap.set({ "n", "x", "i" }, "<C-s>", function()
-  vim.cmd("silent! write")
-  -- stop the active snippet session (blink.cmp uses Neovim's native snippets)
-  if vim.snippet and vim.snippet.stop then
-    pcall(vim.snippet.stop)
-  end
-
-  -- match the original "<Esc>" after save
-  vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<Esc>", true, false, true), "n", false)
-end, { desc = "Save file + clear snippet highlight" })

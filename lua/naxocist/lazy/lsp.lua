@@ -25,7 +25,8 @@ return {
 
       require("mason-lspconfig").setup {
         ensure_installed = { "lua_ls", "rust_analyzer", "clangd",
-          "gopls", "pyright", "jsonnet_ls", "yamlls", "html", "cssls", "ts_ls" }
+          "gopls", "pyright", "jsonnet_ls", "yamlls", "html", "cssls", "ts_ls"
+        }
       }
 
       vim.keymap.set("n", "<leader>dd", "<cmd> lua vim.diagnostic.open_float() <cr>")
@@ -68,10 +69,10 @@ return {
     opts_extend = { "sources.default" }
   },
 
-  {
-    "esmuellert/nvim-eslint",
-    opts = {}
-  },
+  -- {
+  --   "esmuellert/nvim-eslint",
+  --   opts = {}
+  -- },
 
   {
     "folke/lazydev.nvim",
@@ -90,8 +91,8 @@ return {
     build = ":UpdateRemotePlugins",
     dependencies = {
       "nvim-treesitter/nvim-treesitter",
-      "nvim-telescope/telescope.nvim", -- optional
-      "neovim/nvim-lspconfig",         -- optional
+      "nvim-telescope/telescope.nvim",
+      "neovim/nvim-lspconfig",
     },
     opts = {
       keymaps = {
