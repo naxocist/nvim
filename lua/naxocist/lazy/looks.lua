@@ -1,12 +1,24 @@
 return {
   {
+    "projekt0n/github-nvim-theme",
+    name = "github-theme",
+    config = function()
+      require("github-theme").setup {
+        options = {
+          transparent = true,
+        }
+      }
+      vim.cmd "color github_dark_default"
+    end
+  },
+  {
     "rose-pine/neovim",
     name = "rose-pine",
     config = function()
       require("rose-pine").setup {
         styles = {
           italic = false,
-          transparency = true
+          transparency = false
         }
       }
 
@@ -33,4 +45,12 @@ return {
       -- end
     end
   },
+
+
+  {
+    "nvim-lualine/lualine.nvim",
+    dependencies = { "nvim-tree/nvim-web-devicons" },
+    opts = {
+    }
+  }
 }

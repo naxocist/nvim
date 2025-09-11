@@ -7,10 +7,12 @@ return {
       "neovim/nvim-lspconfig",
     },
     config = function()
-      vim.lsp.config('*', {
-        root_markers = { '.git' },
+      -- default config for all servers
+      vim.lsp.config("*", {
+        root_markers = { ".git" },
       })
 
+      -- clangd custom config
       vim.lsp.config.clangd = {
         root_markers = { ".clangd", "compile_commands.json" },
         cmd = {
@@ -18,19 +20,51 @@ return {
           "--clang-tidy",
           "--background-index",
           "--offset-encoding=utf-8",
-          "--header-insertion=never"
+          "--header-insertion=never",
         },
         filetypes = { "c", "cpp" },
       }
 
-      require("mason-lspconfig").setup {
-        ensure_installed = { "lua_ls", "rust_analyzer", "clangd",
-          "gopls", "pyright", "jsonnet_ls", "yamlls", "html", "cssls", "ts_ls"
-        }
+      -- vtsls (TypeScript/JavaScript)
+      vim.lsp.config.vtsls = {
+        settings = {
+          typescript = {
+            tsserver = {
+              maxTsServerMemory = 4096,
+            },
+            preferences = {
+              importModuleSpecifier = "non-relative",
+            },
+          },
+          javascript = {
+            preferences = {
+              importModuleSpecifier = "non-relative",
+            },
+          },
+        },
       }
 
-      vim.keymap.set("n", "<leader>dd", "<cmd> lua vim.diagnostic.open_float() <cr>")
-    end
+      -- mason-lspconfig setup
+      require("mason-lspconfig").setup {
+        ensure_installed = {
+          "lua_ls",
+          "rust_analyzer",
+          "clangd",
+          "gopls",
+          "yamlls",
+          "html",
+          "cssls",
+          "vtsls", -- tsserver replacement
+        },
+      }
+
+      -- diagnostics keymap
+      vim.keymap.set("n", "<leader>dd", "<cmd>lua vim.diagnostic.open_float()<cr>")
+      vim.keymap.set("n", "gD", vim.lsp.buf.declaration, { noremap = true, silent = true }) -- go to declaration
+      vim.keymap.set("n", "gi", vim.lsp.buf.implementation, { noremap = true, silent = true }) -- go to implementation (if supported)
+      vim.keymap.set("n", "gr", vim.lsp.buf.references, { noremap = true, silent = true }) -- find references
+      vim.keymap.set("n", "K", vim.lsp.buf.hover, { noremap = true, silent = true }) -- hover docs
+    end,
   },
 
   -- COMPLETION ENGINE ~ blink.cmp
@@ -69,11 +103,6 @@ return {
     opts_extend = { "sources.default" }
   },
 
-  -- {
-  --   "esmuellert/nvim-eslint",
-  --   opts = {}
-  -- },
-
   {
     "folke/lazydev.nvim",
     ft = "lua", -- only load on lua files
@@ -86,6 +115,7 @@ return {
 
   {
     "luckasRanarison/tailwind-tools.nvim",
+    ft = "ts",
     event = "VeryLazy",
     name = "tailwind-tools",
     build = ":UpdateRemotePlugins",

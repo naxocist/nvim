@@ -23,50 +23,59 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 vim.api.nvim_create_autocmd("BufWritePre", {
   group = augroup("lsp_format_on_save"),
   callback = function(args)
-    if vim.bo[args.buf].filetype ~= "cpp" then
+    local lang_to_auto_format = {
+      lua = true,
+      ts = true,
+      js = true,
+      c = true,
+      py = true,
+      css = true
+    }
+
+    local file_type = vim.bo[args.buf].filetype
+    if lang_to_auto_format[file_type] then
       vim.lsp.buf.format({ bufnr = args.buf })
     end
   end,
 })
 
--- LSP ATTACH
+-- LSP attach: highlights + format mapping
 vim.api.nvim_create_autocmd("LspAttach", {
-  group = augroup("lsp_attach"),
-  callback = function(event)
-    local client = vim.lsp.get_client_by_id(event.data.client_id)
-    local bufnr = event.buf
-
+  group = vim.api.nvim_create_augroup("lsp_attach", { clear = true }),
+  callback = function(ev)
+    local client = vim.lsp.get_client_by_id(ev.data.client_id)
+    local bufnr = ev.buf
     if not client then return end
 
-    -- Check if client supports documentHighlight
-    local supports_highlight =
-        vim.fn.has("nvim-0.11") == 1
-        and client:supports_method("textDocument/documentHighlight", bufnr)
-        or client.supports_method(client, { bufnr = bufnr })
+    -- buffer-local keymap for formatting
+    vim.keymap.set("n", "<space>f", function()
+      vim.lsp.buf.format({ bufnr = bufnr })
+    end, { buffer = bufnr, desc = "Format buffer with LSP" })
 
-    if not supports_highlight then return end
+    -- documentHighlight support
+    if client:supports_method("textDocument/documentHighlight") then
+      local group = vim.api.nvim_create_augroup("lsp_document_highlight_" .. bufnr, { clear = true })
 
-    local highlight_group = vim.api.nvim_create_augroup("lsp_highlight_" .. bufnr, { clear = true })
-
-    local function make_autocmd(events, callback)
-      vim.api.nvim_create_autocmd(events, {
+      vim.api.nvim_create_autocmd({ "CursorHold", "CursorHoldI" }, {
         buffer = bufnr,
-        group = highlight_group,
-        callback = callback,
+        group = group,
+        callback = function() pcall(vim.lsp.buf.document_highlight) end,
+      })
+      vim.api.nvim_create_autocmd({ "CursorMoved", "CursorMovedI" }, {
+        buffer = bufnr,
+        group = group,
+        callback = vim.lsp.buf.clear_references,
+      })
+
+      -- cleanup on detach
+      vim.api.nvim_create_autocmd("LspDetach", {
+        buffer = bufnr,
+        once = true,
+        callback = function()
+          vim.lsp.buf.clear_references()
+          vim.api.nvim_clear_autocmds({ group = group, buffer = bufnr })
+        end,
       })
     end
-
-    make_autocmd({ "CursorHold", "CursorHoldI" }, vim.lsp.buf.document_highlight)
-    make_autocmd({ "CursorMoved", "CursorMovedI" }, vim.lsp.buf.clear_references)
-
-    -- Cleanup on detach
-    vim.api.nvim_create_autocmd("LspDetach", {
-      group = vim.api.nvim_create_augroup("lsp_detach_" .. bufnr, { clear = true }),
-      buffer = bufnr,
-      callback = function(event2)
-        vim.lsp.buf.clear_references()
-        vim.api.nvim_clear_autocmds { group = highlight_group, buffer = event2.buf }
-      end,
-    })
   end,
 })
