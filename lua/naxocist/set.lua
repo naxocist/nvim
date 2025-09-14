@@ -35,6 +35,7 @@ vim.opt.listchars = {
   trail = "·",
   nbsp = "␣",
 }
+vim.opt.swapfile = false
 
 -- Set up diagnostics
 vim.diagnostic.config({

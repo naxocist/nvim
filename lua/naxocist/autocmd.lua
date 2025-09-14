@@ -1,5 +1,5 @@
 local function augroup(name)
-  return vim.api.nvim_create_augroup("lazyvim_" .. name, { clear = true })
+  return vim.api.nvim_create_augroup(name, { clear = true })
 end
 
 -- disable json conceal level
@@ -19,29 +19,21 @@ vim.api.nvim_create_autocmd("TextYankPost", {
   end,
 })
 
--- Auto format on save (except C++)
-vim.api.nvim_create_autocmd("BufWritePre", {
-  group = augroup("lsp_format_on_save"),
-  callback = function(args)
-    local lang_to_auto_format = {
-      lua = true,
-      ts = true,
-      js = true,
-      c = true,
-      py = true,
-      css = true
-    }
 
-    local file_type = vim.bo[args.buf].filetype
-    if lang_to_auto_format[file_type] then
-      vim.lsp.buf.format({ bufnr = args.buf })
-    end
-  end,
-})
 
--- LSP attach: highlights + format mapping
+-- LSP attach: highlights + autoformat
+local autoformat_filetypes = {
+  lua = true,
+  python = true,
+  go = true,
+  javascript = true,
+  typescript = true,
+  jsonc = true,
+  json = true,
+}
+
 vim.api.nvim_create_autocmd("LspAttach", {
-  group = vim.api.nvim_create_augroup("lsp_attach", { clear = true }),
+  group = augroup("lsp_attach"),
   callback = function(ev)
     local client = vim.lsp.get_client_by_id(ev.data.client_id)
     local bufnr = ev.buf
@@ -54,7 +46,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
 
     -- documentHighlight support
     if client:supports_method("textDocument/documentHighlight") then
-      local group = vim.api.nvim_create_augroup("lsp_document_highlight_" .. bufnr, { clear = true })
+      local group = augroup("lsp_document_highlight_" .. bufnr)
 
       vim.api.nvim_create_autocmd({ "CursorHold", "CursorHoldI" }, {
         buffer = bufnr,
@@ -74,6 +66,16 @@ vim.api.nvim_create_autocmd("LspAttach", {
         callback = function()
           vim.lsp.buf.clear_references()
           vim.api.nvim_clear_autocmds({ group = group, buffer = bufnr })
+        end,
+      })
+    end
+
+    if autoformat_filetypes[vim.bo[bufnr].filetype] then
+      vim.api.nvim_create_autocmd("BufWritePre", {
+        buffer = bufnr,
+        group = augroup("lsp_autoformat_" .. bufnr),
+        callback = function()
+          vim.lsp.buf.format({ bufnr = bufnr })
         end,
       })
     end

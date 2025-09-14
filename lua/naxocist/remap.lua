@@ -1,11 +1,6 @@
 vim.g.mapleader = " "
 vim.g.maplocalleader = "\\"
 
--- remap
-vim.keymap.set("n", "<space>f", function()
-  vim.lsp.buf.format({ bufnr = vim.api.nvim_get_current_buf() })
-end)
-
 -- Select all
 vim.keymap.set("n", "<C-a>", "<esc>ggVG")
 

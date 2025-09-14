@@ -60,10 +60,10 @@ return {
 
       -- diagnostics keymap
       vim.keymap.set("n", "<leader>dd", "<cmd>lua vim.diagnostic.open_float()<cr>")
-      vim.keymap.set("n", "gD", vim.lsp.buf.declaration, { noremap = true, silent = true }) -- go to declaration
+      vim.keymap.set("n", "gD", vim.lsp.buf.declaration, { noremap = true, silent = true })    -- go to declaration
       vim.keymap.set("n", "gi", vim.lsp.buf.implementation, { noremap = true, silent = true }) -- go to implementation (if supported)
-      vim.keymap.set("n", "gr", vim.lsp.buf.references, { noremap = true, silent = true }) -- find references
-      vim.keymap.set("n", "K", vim.lsp.buf.hover, { noremap = true, silent = true }) -- hover docs
+      vim.keymap.set("n", "gr", vim.lsp.buf.references, { noremap = true, silent = true })     -- find references
+      vim.keymap.set("n", "K", vim.lsp.buf.hover, { noremap = true, silent = true })           -- hover docs
     end,
   },
 
