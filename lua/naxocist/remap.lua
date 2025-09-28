@@ -60,7 +60,9 @@ end
 
 vim.keymap.set("n", "<leader>ww", function() toggle "wrap" end)
 vim.keymap.set("n", "<leader>nn", function() toggle "relativenumber" end)
+
 vim.keymap.set("n", "q", "<cmd>q<cr>")
+vim.keymap.set("n", "<leader>k", "<cmd>bdelete<cr>")
 
 
 -- <C-s>: Save and (if needed) stop the native snippet session so highlights disappear

@@ -31,11 +31,14 @@ vim.opt.termguicolors = true
 
 vim.opt.list = true -- show invisible characters
 vim.opt.listchars = {
-  tab = "→ ",
+  tab = "▸ ",
   trail = "·",
   nbsp = "␣",
 }
+
 vim.opt.swapfile = false
+vim.opt.winborder = "single"
+
 
 -- Set up diagnostics
 vim.diagnostic.config({

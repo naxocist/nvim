@@ -1,3 +1,7 @@
 return {
-  "github/copilot.vim"
+  "github/copilot.vim",
+  event = "VeryLazy",
+  config = function()
+    vim.cmd "Copilot disable"
+  end
 }

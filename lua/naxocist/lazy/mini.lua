@@ -8,13 +8,10 @@ return {
     end
   },
 
-  -- Indentation guides
   {
-    "echasnovski/mini.indentscope",
-    version = "*",
-    opts = {
-
-    }
+    'nvim-mini/mini.icons',
+    version = false,
+    opts = {}
   },
 
   {

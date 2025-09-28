@@ -25,24 +25,17 @@ return {
         filetypes = { "c", "cpp" },
       }
 
-      -- vtsls (TypeScript/JavaScript)
-      vim.lsp.config.vtsls = {
-        settings = {
-          typescript = {
-            tsserver = {
-              maxTsServerMemory = 4096,
-            },
-            preferences = {
-              importModuleSpecifier = "non-relative",
-            },
-          },
-          javascript = {
-            preferences = {
-              importModuleSpecifier = "non-relative",
-            },
-          },
-        },
+      vim.lsp.config.ruff = {
+        on_attach = function(client, bufnr)
+          client.server_capabilities.documentFormattingProvider = true
+          client.server_capabilities.documentRangeFormattingProvider = true
+
+          -- disable hover & diagnostics from ruff
+          client.server_capabilities.hoverProvider = false
+          client.server_capabilities.diagnosticProvider = false
+        end
       }
+
 
       -- mason-lspconfig setup
       require("mason-lspconfig").setup {
