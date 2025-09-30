@@ -12,11 +12,11 @@
       "#define pb emplace_back",
       "",
       "int32_t main() {",
-        "  cin.tie(nullptr)->sync_with_stdio(0);",
-        "  $0",
-        "  return 0;",
-        "}",
-        ""
+      "  cin.tie(nullptr)->sync_with_stdio(0);",
+      "  $0",
+      "  return 0;",
+      "}",
+      ""
     ],
     "description": "simple-cp"
   }

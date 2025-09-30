@@ -1,16 +1,24 @@
 return {
   {
-    -- MASON + nvim-lspconfig + MASON-LSPCONFIG
     "mason-org/mason-lspconfig.nvim",
     dependencies = {
       { "mason-org/mason.nvim", opts = {} },
       "neovim/nvim-lspconfig",
     },
     config = function()
-      -- default config for all servers
       vim.lsp.config("*", {
         root_markers = { ".git" },
       })
+
+      vim.lsp.config.lua_ls = {
+        settings = {
+          Lua = {
+            workspace = {
+              library = vim.api.nvim_get_runtime_file("", true)
+            }
+          }
+        }
+      }
 
       -- clangd custom config
       vim.lsp.config.clangd = {
@@ -25,30 +33,9 @@ return {
         filetypes = { "c", "cpp" },
       }
 
-      vim.lsp.config.ruff = {
-        on_attach = function(client, bufnr)
-          client.server_capabilities.documentFormattingProvider = true
-          client.server_capabilities.documentRangeFormattingProvider = true
-
-          -- disable hover & diagnostics from ruff
-          client.server_capabilities.hoverProvider = false
-          client.server_capabilities.diagnosticProvider = false
-        end
-      }
-
-
       -- mason-lspconfig setup
       require("mason-lspconfig").setup {
-        ensure_installed = {
-          "lua_ls",
-          "rust_analyzer",
-          "clangd",
-          "gopls",
-          "yamlls",
-          "html",
-          "cssls",
-          "vtsls", -- tsserver replacement
-        },
+        ensure_installed = { "lua_ls", "rust_analyzer", "clangd", "gopls", "yamlls", "html", "cssls", "vtsls" },
       }
 
       -- diagnostics keymap
@@ -80,7 +67,7 @@ return {
       completion = { documentation = { auto_show = true } },
 
       sources = {
-        default = { "lazydev", "lsp", "path", "snippets", "buffer" },
+        default = { "lsp", "path", "snippets", "buffer" },
         providers = {
           lazydev = {
             name = "LazyDev",
@@ -94,16 +81,6 @@ return {
       fuzzy = { implementation = "prefer_rust_with_warning" }
     },
     opts_extend = { "sources.default" }
-  },
-
-  {
-    "folke/lazydev.nvim",
-    ft = "lua", -- only load on lua files
-    opts = {
-      library = {
-        { path = "${3rd}/luv/library", words = { "vim%.uv" } },
-      },
-    },
   },
 
   {

@@ -1,5 +1,6 @@
-vim.opt.clipboard = "unnamedplus" -- use system clipboard
+-- vim.opt.clipboard = "unnamedplus" -- use system clipboard
 
+vim.opt.cursorline = true
 vim.opt.updatetime = 500
 
 vim.opt.scrolloff = 10

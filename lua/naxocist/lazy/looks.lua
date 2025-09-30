@@ -1,18 +1,15 @@
 return {
-
   {
     "lukas-reineke/indent-blankline.nvim",
     main = "ibl",
-    ---@module "ibl"
-    ---@type ibl.config
     opts = {
       -- Smooth update to avoid flicker
       debounce = 100,
 
       -- Indent guide character
       indent = {
-        char = "▏",
-        tab_char = "|",
+        tab_char = "▏",
+        char = "|",
       },
 
       -- Highlight for whitespace at line ends and empty lines
@@ -28,26 +25,16 @@ return {
     }
   },
 
-
   {
-    "projekt0n/github-nvim-theme",
-    name = "github-theme",
-
+    "vague2k/vague.nvim",
+    lazy = false,
+    priority = 1000,
     config = function()
-      require("github-theme").setup({
-        options = {
-          transparent = false
-        }
+      require("vague").setup({
+        italic = false
       })
-      vim.cmd "color github_dark_default"
+      vim.cmd("colorscheme vague")
     end
-  },
-
-  {
-    "nvim-lualine/lualine.nvim",
-    dependencies = { "nvim-tree/nvim-web-devicons" },
-    opts = {
-    }
   },
 
   {
@@ -63,41 +50,6 @@ return {
 
       -- vim.cmd "color rose-pine"
 
-      -- Set background to black for everything
-      local groups = {
-        "Normal",
-        "NormalNC",
-        "NormalFloat",
-        "SignColumn",
-        "MsgArea",
-        "TelescopeNormal",
-        "TelescopeBorder",
-        "TelescopePromptNormal",
-        "TelescopePromptBorder",
-        "TelescopeResultsNormal",
-        "TelescopeResultsBorder",
-        "TelescopePreviewNormal",
-        "TelescopePreviewBorder",
-        "Pmenu",
-        "FloatBorder",
-        "StatusLine",
-        "StatusLineNC",
-        "TabLine",
-        "TabLineFill",
-        "TabLineSel",
-        "WinSeparator",
-      }
-
-      for _, group in ipairs(groups) do
-        vim.api.nvim_set_hl(0, group, { bg = "#000000" })
-      end
-
-      -- blink.cmp highlight overrides
-      vim.api.nvim_set_hl(0, "BlinkCmpDoc", { bg = "black", fg = "white" })
-      vim.api.nvim_set_hl(0, "BlinkCmpDocBorder", { bg = "black", fg = "white" })
-
-      vim.api.nvim_set_hl(0, "BlinkCmpMenu", { bg = "black", fg = "white" })
-      vim.api.nvim_set_hl(0, "BlinkCmpMenuSel", { bg = "#333333", fg = "white" })
 
       -- ## THEME LIKE GVIM default ##
       -- vim.cmd "color morning"

@@ -20,7 +20,6 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 })
 
 
-
 -- LSP attach: highlights + autoformat
 local autoformat_filetypes = {
   lua = true,
