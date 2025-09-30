@@ -64,6 +64,8 @@ vim.keymap.set("n", "<leader>nn", function() toggle "relativenumber" end)
 vim.keymap.set("n", "q", "<cmd>q<cr>")
 vim.keymap.set("n", "<leader>k", "<cmd>bdelete<cr>")
 
+-- view all marks
+vim.keymap.set("n", "<leader>m", "<cmd>marks<cr>")
 
 -- <C-s>: Save and (if needed) stop the native snippet session so highlights disappear
 vim.keymap.set({ "n", "x", "i" }, "<C-s>", function()

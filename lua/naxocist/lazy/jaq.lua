@@ -4,7 +4,7 @@ local obj_path = "/home/naxocist/.config/nvim/lua/naxocist/custom/tmp"
 return {
   "is0n/jaq-nvim",
   config = function()
-    -- vim.keymap.set("n", "<leader>r", "<cmd>Jaq terminal<cr>")
+    vim.keymap.set("n", "<leader>r", "<cmd>Jaq terminal<cr>")
 
     vim.keymap.set("n", "<leader>i", function()
       vim.cmd(string.format("50vsplit %s", input_path))

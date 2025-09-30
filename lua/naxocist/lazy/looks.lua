@@ -32,11 +32,15 @@ return {
   {
     "projekt0n/github-nvim-theme",
     name = "github-theme",
-    opts = {
-      options = {
-        transparent = true
-      }
-    }
+
+    config = function()
+      require("github-theme").setup({
+        options = {
+          transparent = false
+        }
+      })
+      vim.cmd "color github_dark_default"
+    end
   },
 
   {
@@ -57,7 +61,7 @@ return {
         }
       }
 
-      vim.cmd "color rose-pine"
+      -- vim.cmd "color rose-pine"
 
       -- Set background to black for everything
       local groups = {
