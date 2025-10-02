@@ -18,7 +18,7 @@ return {
           vim.keymap.set("n", keys, func, { buffer = event.buf, desc = "LSP: " .. desc })
         end
 
-        map("<leader>d", vim.diagnostic.open_float, "open [D]iagnostic")
+        map("<leader>od", vim.diagnostic.open_float, "open [D]iagnostic")
         map("gd", require("telescope.builtin").lsp_definitions, "[G]oto [D]efinition")
         map("gr", require("telescope.builtin").lsp_references, "[G]oto [R]eferences")
         map("gI", require("telescope.builtin").lsp_implementations, "[G]oto [I]mplementation")
@@ -68,9 +68,15 @@ return {
       end,
     })
 
-    local capabilities = vim.lsp.protocol.make_client_capabilities()
-    capabilities = vim.tbl_deep_extend("force", capabilities, require("cmp_nvim_lsp").default_capabilities())
-
+    local capabilities = vim.tbl_deep_extend("force",
+      vim.lsp.protocol.make_client_capabilities(),
+      require("cmp_nvim_lsp").default_capabilities(),
+      {
+        general = {
+          positionEncodings = { "utf-16" },
+        },
+      }
+    )
     -- Add any additional override configuration in the following tables. Available keys are:
     -- - cmd (table): Override the default command used to start the server
     -- - filetypes (table): Override the default list of associated filetypes for the server
@@ -117,6 +123,7 @@ return {
       "stylua", -- Used to format Lua code
     })
     require("mason-tool-installer").setup { ensure_installed = ensure_installed }
+
 
     for server, cfg in pairs(servers) do
       -- For each LSP server (cfg), we merge:

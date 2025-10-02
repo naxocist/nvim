@@ -6,7 +6,6 @@ vim.keymap.set({ "n", "v", "x" }, "sy", '"+y<cr>')
 vim.keymap.set({ "n", "v", "x" }, "sp", '"+p<cr>')
 vim.keymap.set({ "n", "v", "x" }, "sd", '"+d<cr>')
 
-
 -- Select all
 vim.keymap.set("n", "<C-a>", "<esc>ggVG")
 
@@ -28,10 +27,10 @@ vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv")
 vim.keymap.set("n", "<esc>", "<cmd>noh<cr>")
 
 -- Resize window
-vim.keymap.set("n", "<A-,>", "<C-w>5>")
-vim.keymap.set("n", "<A-.>", "<C-w>5<")
-vim.keymap.set("n", "<A-t>", "<C-w>+")
-vim.keymap.set("n", "<A-s>", "<C-w>-")
+vim.keymap.set("n", "<A-w>", "<C-w>5>") -- wider
+vim.keymap.set("n", "<A-n>", "<C-w>5<") -- narrower
+vim.keymap.set("n", "<A-t>", "<C-w>+")  -- taller
+vim.keymap.set("n", "<A-s>", "<C-w>-")  -- shorter
 
 -- Navigate through panes
 vim.keymap.set("n", "<c-h>", "<cmd>wincmd h<cr>")

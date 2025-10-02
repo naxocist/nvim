@@ -34,6 +34,11 @@ return {
         italic = false
       })
       vim.cmd("colorscheme vague")
+
+      -- Active statusline (current window)
+      vim.api.nvim_set_hl(0, "StatusLine", { fg = "#ffffff", bg = "#000000" })
+      -- Inactive statusline (other windows)
+      vim.api.nvim_set_hl(0, "StatusLineNC", { fg = "#888888", bg = "#000000" })
     end
   },
 

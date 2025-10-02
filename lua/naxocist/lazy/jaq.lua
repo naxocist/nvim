@@ -34,7 +34,7 @@ return {
         default     = "float",
 
         -- Start in insert mode
-        startinsert = false,
+        startinsert = true,
 
         -- Use `wincmd p` on startup
         wincmd      = false,
