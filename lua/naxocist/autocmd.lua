@@ -80,3 +80,47 @@ vim.api.nvim_create_autocmd("LspAttach", {
     end
   end,
 })
+
+-- DIAGNOSTIC COLOR on line numbers
+vim.cmd([[
+  highlight! link DiagnosticLineNrError DiagnosticError
+  highlight! link DiagnosticLineNrWarn  DiagnosticWarn
+  highlight! link DiagnosticLineNrInfo  DiagnosticInfo
+  highlight! link DiagnosticLineNrHint  DiagnosticHint
+]])
+
+-- Function to colorize line numbers based on diagnostics
+local function set_line_diagnostic_hl()
+  for _, bufnr in ipairs(vim.api.nvim_list_bufs()) do
+    if vim.api.nvim_buf_is_loaded(bufnr) then
+      local diags = vim.diagnostic.get(bufnr)
+      local ns = vim.api.nvim_create_namespace("diagnostic_line_nr")
+
+      -- Clear old highlights
+      vim.api.nvim_buf_clear_namespace(bufnr, ns, 0, -1)
+
+      for _, d in ipairs(diags) do
+        local hl_group = ({
+          [vim.diagnostic.severity.ERROR] = "DiagnosticLineNrError",
+          [vim.diagnostic.severity.WARN]  = "DiagnosticLineNrWarn",
+          [vim.diagnostic.severity.INFO]  = "DiagnosticLineNrInfo",
+          [vim.diagnostic.severity.HINT]  = "DiagnosticLineNrHint",
+        })[d.severity]
+
+        if hl_group then
+          vim.api.nvim_buf_set_extmark(bufnr, ns, d.lnum, 0, {
+            end_line = d.lnum,
+            hl_group = hl_group,
+            hl_mode = "combine",
+            number_hl_group = hl_group, -- this is the key: color the number column
+          })
+        end
+      end
+    end
+  end
+end
+
+-- Update whenever diagnostics change
+vim.api.nvim_create_autocmd({ "DiagnosticChanged", "BufEnter" }, {
+  callback = set_line_diagnostic_hl,
+})

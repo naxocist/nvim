@@ -24,7 +24,7 @@ return {
           markdown = "glow %",
           python   = "python3 %",
           go       = "go run %",
-          sh       = "sh %",
+          sh       = "chmod +x ./% && ./%",
           cpp      = string.format("g++ %% -o %s && %s < %s", obj_path, obj_path, input_path)
         }
       },

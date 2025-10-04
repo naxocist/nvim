@@ -5,6 +5,7 @@ vim.opt.updatetime = 500
 
 vim.opt.scrolloff = 10
 vim.opt.signcolumn = "yes"
+vim.opt.number = true
 vim.opt.relativenumber = true
 
 -- set tab size to 2
@@ -43,5 +44,6 @@ vim.opt.winborder = "single"
 -- Set up diagnostics
 vim.diagnostic.config({
   virtual_text = true,
-  virtual_lines = false
+  virtual_lines = false,
+  signs = false
 })

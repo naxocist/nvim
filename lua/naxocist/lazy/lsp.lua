@@ -25,7 +25,7 @@ return {
         map("<leader>D", require("telescope.builtin").lsp_type_definitions, "Type [D]efinition")
         map("<leader>ds", require("telescope.builtin").lsp_document_symbols, "[D]ocument [S]ymbols")
         map("<leader>ws", require("telescope.builtin").lsp_dynamic_workspace_symbols, "[W]orkspace [S]ymbols")
-        map("<leader>rn", vim.lsp.buf.rename, "[R]e[n]ame")
+        map("grn", vim.lsp.buf.rename, "[R]e[n]ame")
         map("<leader>ca", vim.lsp.buf.code_action, "[C]ode [A]ction")
         map("K", vim.lsp.buf.hover, "Hover Documentation")
         map("gD", vim.lsp.buf.declaration, "[G]oto [D]eclaration")
@@ -101,7 +101,21 @@ return {
           },
         },
       },
-      basedpyright = {},
+      pylsp = {
+        settings = {
+          pylsp = {
+            plugins = {
+              pyflakes = { enabled = false },
+              pycodestyle = { enabled = false },
+              autopep8 = { enabled = false },
+              yapf = { enabled = false },
+              pylsp_mypy = { enabled = false },
+              pylsp_black = { enabled = false },
+              pylsp_insort = { enabled = false },
+            }
+          }
+        }
+      },
       ruff = {},
       jsonls = {},
       sqlls = {},
@@ -115,6 +129,14 @@ return {
       cssls = {},
       tailwindcss = {},
       graphql = {},
+      clangd = {
+        cmd = {
+          "clangd",
+          "--header-insertion=never",
+          "--completion-style=detailed",
+        }
+      },
+      svelte = {}
     }
 
     -- Ensure the servers and tools above are installed
