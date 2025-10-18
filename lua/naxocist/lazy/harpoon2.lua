@@ -7,14 +7,14 @@ return {
     local harpoon = require("harpoon")
     harpoon:setup()
 
-    vim.keymap.set("n", "<leader>a", function()
-      harpoon:list():add()
+    vim.keymap.set("n", "<leader>ha", function()
+    harpoon:list():add()
 
       local file_name = vim.fn.expand("%")
       print(file_name .. " was added to harpoon!")
     end)
 
-    vim.keymap.set("n", "<leader>h", function() harpoon.ui:toggle_quick_menu(harpoon:list()) end)
+    vim.keymap.set("n", "<leader>hh", function() harpoon.ui:toggle_quick_menu(harpoon:list()) end)
     vim.keymap.set("n", "<leader>1", function() harpoon:list():select(1) end)
     vim.keymap.set("n", "<leader>2", function() harpoon:list():select(2) end)
     vim.keymap.set("n", "<leader>3", function() harpoon:list():select(3) end)

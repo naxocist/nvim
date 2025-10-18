@@ -31,9 +31,10 @@ return {
     priority = 1000,
     config = function()
       require("vague").setup({
+        transparent = true,
         italic = false
       })
-      vim.cmd("colorscheme vague")
+      -- vim.cmd("colorscheme vague")
 
       -- Active statusline (current window)
       vim.api.nvim_set_hl(0, "StatusLine", { fg = "#ffffff", bg = "#000000" })
@@ -48,13 +49,12 @@ return {
     config = function()
       require("rose-pine").setup {
         styles = {
-          transparency = false,
+          transparency = true,
           italic = false,
         }
       }
 
-      -- vim.cmd "color rose-pine"
-
+      vim.cmd("colorscheme rose-pine")
 
       -- ## THEME LIKE GVIM default ##
       -- vim.cmd "color morning"
