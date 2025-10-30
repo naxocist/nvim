@@ -29,6 +29,7 @@ local autoformat_filetypes = {
   typescript = true,
   jsonc = true,
   json = true,
+  -- svelte = true
 }
 
 vim.api.nvim_create_autocmd("LspAttach", {
