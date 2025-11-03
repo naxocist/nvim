@@ -125,7 +125,6 @@ vim.pack.add({
   { src = "https://github.com/nvim-mini/mini.pairs" },
   { src = "https://github.com/A7Lavinraj/fyler.nvim" },
   { src = "https://github.com/nvim-mini/mini.icons" },
-  { src = 'https://github.com/vieitesss/miniharp.nvim' },
   { src = "https://github.com/ibhagwan/fzf-lua" },
   { src = "https://github.com/kevinhwang91/nvim-ufo" },
   { src = "https://github.com/kevinhwang91/promise-async" },
@@ -150,17 +149,6 @@ require("fyler").setup({
   },
 })
 keymap("n", "<leader>e", ":Fyler kind=float<CR>")
-
-require("miniharp").setup({
-  autoload = true,         -- load marks for this cwd on startup (default: true)
-  autosave = true,         -- save marks for this cwd on exit (default: true)
-  show_on_autoload = true, -- show popup list after a successful autoload (default: false)
-})
-vim.keymap.set("n", "<leader>m", require("miniharp").toggle_file, { desc = "miniharp: toggle file mark" })
-vim.keymap.set("n", "<C-j>", require("miniharp").next, { desc = "miniharp: next file mark" })
-vim.keymap.set("n", "<C-k>", require("miniharp").prev, { desc = "miniharp: prev file mark" })
-vim.keymap.set("n", "<leader>l", require("miniharp").show_list, { desc = "miniharp: list marks" })
-vim.keymap.set("n", "<leader>c", require("miniharp").clear, { desc = "miniharp: clear marks list" })
 
 local fzf_lua = require("fzf-lua")
 keymap("n", "<C-p>", fzf_lua.files)
@@ -226,7 +214,7 @@ autocmd('TextYankPost', {
 vim.pack.add({
   { src = "https://github.com/vague-theme/vague.nvim" },
 })
-require("vague").setup { italic = false, bold = false }
+require("vague").setup { italic = false, bold = false, transparent = true }
 vim.cmd("color vague")
 
 vim.o.guicursor = "i:block-MyInsertCursor"
