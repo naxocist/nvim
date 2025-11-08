@@ -12,7 +12,6 @@ local compile_flags = "-O2 -std=c++17"
 
 local keymap = vim.keymap.set
 
-
 local function toggle_output()
   if input_buf and vim.api.nvim_buf_is_valid(input_buf) then
     vim.api.nvim_buf_delete(input_buf, { force = true })
@@ -35,7 +34,6 @@ local function toggle_output()
   vim.cmd("wincmd p")
 end
 
-
 local function force_open_refresh_output()
   if output_buf and vim.api.nvim_buf_is_valid(output_buf) then
     vim.api.nvim_buf_call(output_buf, function()
@@ -45,7 +43,6 @@ local function force_open_refresh_output()
     toggle_output()
   end
 end
-
 
 local function compile_run_cpp()
   local file = vim.api.nvim_buf_get_name(0)
@@ -73,7 +70,12 @@ local function compile_run_cpp()
 
   local run_cmd = string.format(
     "/usr/bin/time -f \"%%e\" -o '%s' timeout %d sh -c \"'%s' < '%s'\" > '%s' 2>&1; echo $? > '%s'",
-    time_file, timelimit_seconds, exe, input_file, output_file, exit_file
+    time_file,
+    timelimit_seconds,
+    exe,
+    input_file,
+    output_file,
+    exit_file
   )
   os.execute(run_cmd)
 
@@ -138,7 +140,6 @@ local function compile_run_cpp()
   print(msg)
 end
 
-
 keymap("n", "<leader>i", toggle_output)
 keymap("n", "<leader>r", compile_run_cpp, { noremap = true, silent = true })
 
@@ -148,7 +149,7 @@ local function find_separators()
   local start = vim.fn.search("^" .. separator .. "$", "bnW")
   local stop = vim.fn.search("^" .. separator .. "$", "nW")
 
-  local cur_line = vim.fn.line(".")          -- current cursor line
+  local cur_line = vim.fn.line(".") -- current cursor line
   local line_text = vim.fn.getline(cur_line) -- text of current line
 
   if not start or not stop or start > stop or start == -1 or stop == -1 or line_text == separator then
@@ -161,7 +162,7 @@ local function find_separators()
 end
 
 local function feedkeys(cmd)
-  vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes(cmd, true, false, true), 'n', false)
+  vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes(cmd, true, false, true), "n", false)
 end
 
 -- add blank testcase (insert mode)
@@ -186,7 +187,7 @@ end)
 -- add testcase
 keymap("n", "ta", function()
   -- string from trimmed system clipboard
-  local trimmed = vim.fn.getreg('+'):gsub("^%s+", ""):gsub("%s+$", "")
+  local trimmed = vim.fn.getreg("+"):gsub("^%s+", ""):gsub("%s+$", "")
   local cmd = "ggO" .. separator .. "<ESC>O" .. trimmed .. "<ESC>"
   feedkeys(cmd)
 end)

@@ -4,9 +4,9 @@ return {
     offsetEncoding = { "utf-8", "utf-16" },
     textDocument = {
       completion = {
-        editsNearCursor = true
-      }
-    }
+        editsNearCursor = true,
+      },
+    },
   },
   filetypes = { "c", "cpp", "objc", "objcpp", "cuda" },
   cmd = {

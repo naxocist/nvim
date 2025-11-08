@@ -1,5 +1,9 @@
 {
   "plugins": {
+    "Eezzy.nvim": {
+      "rev": "b3e75bb",
+      "src": "https://github.com/ashish2508/Eezzy.nvim"
+    },
     "autoclose.nvim": {
       "rev": "3f86702",
       "src": "https://github.com/m4xshen/autoclose.nvim"
@@ -70,6 +74,14 @@
     },
     "vague.nvim": {
       "rev": "5689afd"
+    },
+    "vercel.nvim": {
+      "rev": "7256709",
+      "src": "https://github.com/tiesen243/vercel.nvim"
+    },
+    "vim-fugitive": {
+      "rev": "61b51c0",
+      "src": "https://github.com/tpope/vim-fugitive"
     }
   }
 }
