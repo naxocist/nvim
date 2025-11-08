@@ -4,6 +4,8 @@ vim.pack.add({
   { src = "https://github.com/saghen/blink.cmp", version = vim.version.range("^1") },
   { src = "https://github.com/mason-org/mason-lspconfig.nvim" },
   { src = "https://github.com/neovim/nvim-lspconfig" },
+  { src = "https://github.com/nvim-lua/plenary.nvim" },
+  { src = "https://github.com/nvim-telescope/telescope.nvim" },
 })
 
 require("nvim-treesitter.configs").setup({
@@ -64,3 +66,10 @@ require("blink.cmp").setup({
 
 local keymap = vim.keymap.set
 keymap("n", "<leader>od", vim.diagnostic.open_float)
+
+local builtin = require("telescope.builtin")
+keymap("n", "gd", builtin.lsp_definitions)
+keymap("n", "gi", builtin.lsp_implementations)
+
+-- enable recursively search in current folder in gf, ex. including node_modules
+vim.opt.path:append("**")

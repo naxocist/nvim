@@ -53,6 +53,16 @@ keymap("n", "<leader>O", ":restart<CR>")
 keymap("n", "<leader>q", ":quit<CR>")
 keymap({ "n", "i" }, "<C-s>", "<ESC>:write<CR>")
 keymap({ "n", "i" }, "<C-a>", "<ESC>gg<S-v>G")
+keymap("v", "sy", '"+y')
+keymap("v", "sp", '"+y')
+
+package.path = package.path .. ";" .. vim.fn.stdpath("config") .. "/custom/?.lua"
+require("cp")
+
+package.path = package.path .. ";" .. vim.fn.stdpath("config") .. "/plugins/?.lua"
+require("lsp")
+require("utils")
+require("looks")
 
 -- AUTOCMD
 local autocmd = vim.api.nvim_create_autocmd
@@ -67,11 +77,3 @@ autocmd("TextYankPost", {
   end,
   group = highlight_group,
 })
-
-package.path = package.path .. ";" .. vim.fn.stdpath("config") .. "/custom/?.lua"
-require("cp")
-
-package.path = package.path .. ";" .. vim.fn.stdpath("config") .. "/plugins/?.lua"
-require("lsp")
-require("utils")
-require("looks")

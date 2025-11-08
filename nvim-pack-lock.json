@@ -68,9 +68,17 @@
       "rev": "72d54c3",
       "src": "https://github.com/kevinhwang91/nvim-ufo"
     },
+    "plenary.nvim": {
+      "rev": "b9fd522",
+      "src": "https://github.com/nvim-lua/plenary.nvim"
+    },
     "promise-async": {
       "rev": "119e896",
       "src": "https://github.com/kevinhwang91/promise-async"
+    },
+    "telescope.nvim": {
+      "rev": "0294ae3",
+      "src": "https://github.com/nvim-telescope/telescope.nvim"
     },
     "vague.nvim": {
       "rev": "5689afd"
