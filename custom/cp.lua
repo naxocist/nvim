@@ -26,10 +26,12 @@ local function toggle_output()
   vim.cmd("50vsplit " .. input_file)
   input_buf = vim.api.nvim_get_current_buf()
   vim.cmd("set norelativenumber")
+  vim.api.nvim_set_hl(0, "LineNr", { fg = "#555555", bg = "NONE" })
 
   vim.cmd("split " .. output_file)
   output_buf = vim.api.nvim_get_current_buf()
   vim.cmd("set norelativenumber")
+  vim.api.nvim_set_hl(0, "LineNr", { fg = "#555555", bg = "NONE" })
 
   vim.cmd("wincmd p")
 end

@@ -6,6 +6,11 @@ vim.pack.add({
   { src = "https://github.com/neovim/nvim-lspconfig" },
   { src = "https://github.com/nvim-lua/plenary.nvim" },
   { src = "https://github.com/nvim-telescope/telescope.nvim" },
+  { src = "https://github.com/chomosuke/typst-preview.nvim" },
+})
+
+require("typst-preview").setup({
+  dependencies_bin = { ['tinymist'] = 'tinymist' }
 })
 
 require("nvim-treesitter.configs").setup({
@@ -66,10 +71,13 @@ require("blink.cmp").setup({
 
 local keymap = vim.keymap.set
 keymap("n", "<leader>od", vim.diagnostic.open_float)
+keymap("n", "<leader>ca", vim.lsp.buf.code_action)
 
 local builtin = require("telescope.builtin")
 keymap("n", "gd", builtin.lsp_definitions)
 keymap("n", "gi", builtin.lsp_implementations)
+
+keymap("n", "<leader>t", ":TypstPreview<CR>")
 
 -- enable recursively search in current folder in gf, ex. including node_modules
 vim.opt.path:append("**")
