@@ -1,28 +1,29 @@
 vim.pack.add({
-  { src = "https://github.com/nvim-treesitter/nvim-treesitter" },
-  { src = "https://github.com/mason-org/mason.nvim" },
-  { src = "https://github.com/saghen/blink.cmp", version = vim.version.range("^1") },
-  { src = "https://github.com/mason-org/mason-lspconfig.nvim" },
-  { src = "https://github.com/neovim/nvim-lspconfig" },
   { src = "https://github.com/nvim-lua/plenary.nvim" },
+
+  { src = "https://github.com/nvim-treesitter/nvim-treesitter" },
+  { src = "https://github.com/saghen/blink.cmp", version = vim.version.range("^1") },
   { src = "https://github.com/nvim-telescope/telescope.nvim" },
   { src = "https://github.com/chomosuke/typst-preview.nvim" },
+  { src = "https://github.com/j-hui/fidget.nvim" },
+
+  { src = "https://github.com/mason-org/mason.nvim" },
+  { src = "https://github.com/mason-org/mason-lspconfig.nvim" },
+  { src = "https://github.com/neovim/nvim-lspconfig" },
 })
+require("fidget").setup()
 
 require("typst-preview").setup({
-  dependencies_bin = { ['tinymist'] = 'tinymist' }
+  dependencies_bin = { ["tinymist"] = "tinymist" },
 })
 
 require("nvim-treesitter.configs").setup({
   auto_install = true,
-  highlight = {
-    enable = true,
-  },
+  highlight = { enable = true },
 })
 
 require("mason").setup()
 require("mason-lspconfig").setup()
-vim.diagnostic.config({ virtual_text = true })
 
 require("blink.cmp").setup({
   fuzzy = { implementation = "prefer_rust_with_warning" },

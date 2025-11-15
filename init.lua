@@ -1,9 +1,10 @@
 vim.g.mapleader = " "
+vim.g.localleader = " "
 vim.o.number = true
 vim.o.relativenumber = true
 vim.o.termguicolors = true
 vim.o.signcolumn = "yes"
-vim.o.winborder = "rounded"
+vim.o.winborder = "single"
 vim.o.scrolloff = 8
 
 vim.o.wrap = false
@@ -26,11 +27,10 @@ vim.o.listchars = "tab: ,trail:·,nbsp:+"
 vim.diagnostic.config({
   virtual_text = true,
   virtual_lines = false,
-  signs = false,
+  signs = true,
 })
 
 -- KEYMAPS
-
 local keymap = vim.keymap.set
 
 -- Move down, but use 'gj' if no count is given
@@ -68,7 +68,6 @@ require("looks")
 local autocmd = vim.api.nvim_create_autocmd
 local augroup = vim.api.nvim_create_augroup
 
-vim.api.nvim_set_hl(0, "IncSearch", { bg = "#ffd866", fg = "#1e1e2e" })
 local highlight_group = augroup("YankHighlight", { clear = true })
 autocmd("TextYankPost", {
   pattern = "*",

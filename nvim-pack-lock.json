@@ -13,6 +13,10 @@
       "src": "https://github.com/saghen/blink.cmp",
       "version": "1.0.0 - 2.0.0"
     },
+    "fidget.nvim": {
+      "rev": "e32b672",
+      "src": "https://github.com/j-hui/fidget.nvim"
+    },
     "fyler.nvim": {
       "rev": "d6b855c",
       "src": "https://github.com/A7Lavinraj/fyler.nvim"
@@ -28,6 +32,10 @@
     "jaq-nvim": {
       "rev": "236296a",
       "src": "https://github.com/is0n/jaq-nvim"
+    },
+    "lualine.nvim": {
+      "rev": "3946f01",
+      "src": "https://github.com/nvim-lualine/lualine.nvim"
     },
     "mason-lspconfig.nvim": {
       "rev": "d7b5feb",

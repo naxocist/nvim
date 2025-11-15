@@ -1,12 +1,14 @@
 local keymap = vim.keymap.set
 
 vim.pack.add({
-  { src = "https://github.com/nvim-mini/mini.pairs" },
-  { src = "https://github.com/A7Lavinraj/fyler.nvim" },
   { src = "https://github.com/nvim-mini/mini.icons" },
+  { src = "https://github.com/nvim-mini/mini.pairs" },
+
+  { src = "https://github.com/A7Lavinraj/fyler.nvim" },
   { src = "https://github.com/ibhagwan/fzf-lua" },
-  { src = "https://github.com/kevinhwang91/nvim-ufo" },
+
   { src = "https://github.com/kevinhwang91/promise-async" },
+  { src = "https://github.com/kevinhwang91/nvim-ufo" },
 
   { src = "https://github.com/lewis6991/gitsigns.nvim" },
   { src = "https://github.com/tpope/vim-fugitive" },
@@ -40,8 +42,8 @@ vim.o.foldcolumn = "0" -- '0' is not bad
 vim.o.foldlevel = 99 -- Using ufo provider need a large value, feel free to decrease the value
 vim.o.foldlevelstart = 99
 vim.o.foldenable = true
-vim.keymap.set("n", "zR", require("ufo").openAllFolds)
-vim.keymap.set("n", "zM", require("ufo").closeAllFolds)
+keymap("n", "zR", require("ufo").openAllFolds)
+keymap("n", "zM", require("ufo").closeAllFolds)
 local handler = function(virtText, lnum, endLnum, width, truncate)
   local newVirtText = {}
   local suffix = (" 󰁂 %d "):format(endLnum - lnum)
