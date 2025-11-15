@@ -1,10 +1,18 @@
 vim.pack.add({
   { src = "https://github.com/vague-theme/vague.nvim" },
   { src = "https://github.com/tiesen243/vercel.nvim" },
+  { src = "https://github.com/rose-pine/neovim" },
   { src = "https://github.com/nvim-lualine/lualine.nvim" },
 })
 
 require("vague").setup({ italic = false, bold = false, transparent = true })
+require("rose-pine").setup({
+  styles = {
+    bold = false,
+    italic = false,
+    transparency = true
+  }
+})
 require("vercel").setup({
   theme = "dark",
   transparent = true,
@@ -17,7 +25,7 @@ require("vercel").setup({
     bufferline = false,
   },
 })
-vim.cmd("color vague")
+vim.cmd("color rose-pine")
 
 -- vim.o.guicursor = "i:ver30-MyInsertCursor"
 -- vim.api.nvim_set_hl(0, "MyInsertCursor", { fg = "#000000", bg = "#FF0000" })

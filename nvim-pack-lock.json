@@ -4,6 +4,10 @@
       "rev": "b3e75bb",
       "src": "https://github.com/ashish2508/Eezzy.nvim"
     },
+    "LuaSnip": {
+      "rev": "3732756842a2f7e0e76a7b0487e9692072857277",
+      "src": "https://github.com/L3MON4D3/LuaSnip"
+    },
     "autoclose.nvim": {
       "rev": "3f86702",
       "src": "https://github.com/m4xshen/autoclose.nvim"
@@ -16,6 +20,10 @@
     "fidget.nvim": {
       "rev": "e32b672",
       "src": "https://github.com/j-hui/fidget.nvim"
+    },
+    "flash.nvim": {
+      "rev": "fcea7ff",
+      "src": "https://github.com/folke/flash.nvim"
     },
     "fyler.nvim": {
       "rev": "d6b855c",
@@ -32,6 +40,10 @@
     "jaq-nvim": {
       "rev": "236296a",
       "src": "https://github.com/is0n/jaq-nvim"
+    },
+    "kanagawa.nvim": {
+      "rev": "aef7f5c",
+      "src": "https://github.com/rebelot/kanagawa.nvim"
     },
     "lualine.nvim": {
       "rev": "3946f01",
@@ -65,9 +77,17 @@
       "rev": "29c50dd",
       "src": "https://github.com/vieitesss/miniharp.nvim"
     },
+    "neovim": {
+      "rev": "cf2a288",
+      "src": "https://github.com/rose-pine/neovim"
+    },
     "none-ls.nvim": {
       "rev": "5501975",
       "src": "https://github.com/nvimtools/none-ls.nvim"
+    },
+    "nvim": {
+      "rev": "da33755",
+      "src": "https://github.com/catppuccin/nvim"
     },
     "nvim-lspconfig": {
       "rev": "a89bfcf",

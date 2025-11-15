@@ -3,7 +3,6 @@ vim.pack.add({
 
   { src = "https://github.com/nvim-treesitter/nvim-treesitter" },
   { src = "https://github.com/saghen/blink.cmp", version = vim.version.range("^1") },
-  { src = "https://github.com/nvim-telescope/telescope.nvim" },
   { src = "https://github.com/chomosuke/typst-preview.nvim" },
   { src = "https://github.com/j-hui/fidget.nvim" },
 
@@ -12,6 +11,7 @@ vim.pack.add({
   { src = "https://github.com/neovim/nvim-lspconfig" },
 
   { src = "https://github.com/nvimtools/none-ls.nvim" },
+  { src = "https://github.com/L3MON4D3/LuaSnip" }
 })
 require("fidget").setup()
 require("typst-preview").setup({ dependencies_bin = { ["tinymist"] = "tinymist" } })
@@ -31,6 +31,7 @@ null_ls.setup({
   },
 })
 
+require("luasnip.loaders.from_vscode").lazy_load({ paths = { "./snippets" }})
 require("blink.cmp").setup({
   fuzzy = { implementation = "prefer_rust_with_warning" },
   signature = { enabled = true },
@@ -73,18 +74,13 @@ require("blink.cmp").setup({
     },
   },
 
-  sources = { default = { "lsp" } },
+  sources = { default = { "lsp", "snippets" } },
 })
 
 local keymap = vim.keymap.set
 keymap("n", "<leader>od", vim.diagnostic.open_float)
 keymap("n", "<leader>ca", vim.lsp.buf.code_action)
-
-local builtin = require("telescope.builtin")
-keymap("n", "gd", builtin.lsp_definitions)
-keymap("n", "gi", builtin.lsp_implementations)
-
+keymap("n", "gd", vim.lsp.buf.definition)
+keymap("n", "gi", vim.lsp.buf.implementation)
 keymap("n", "<leader>t", ":TypstPreview<CR>")
 
--- enable recursively search in current folder in gf, ex. including node_modules
--- vim.opt.path:append("**")

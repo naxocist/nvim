@@ -12,12 +12,18 @@ vim.pack.add({
 
   { src = "https://github.com/lewis6991/gitsigns.nvim" },
   { src = "https://github.com/tpope/vim-fugitive" },
+  { src = "https://github.com/folke/flash.nvim" }
 })
 
+local flash = require("flash")
+flash.setup()
+keymap({"n", "x", "o"}, "s", function () flash.jump() end)
+keymap({"n", "x", "o"}, "S", function () flash.treesitter() end)
 
 require("mini.pairs").setup()
 
-require("fyler").setup({
+local fyler = require("fyler")
+fyler.setup({
   default_explorer = true,
   mappings = {
     ["q"] = "CloseView",
@@ -32,9 +38,12 @@ require("fyler").setup({
     ["<BS>"] = "CollapseNode",
   },
 })
-keymap("n", "<leader>e", ":Fyler kind=float<CR>")
+keymap("n", "<leader>e", function()
+  fyler.toggle({ kind = "float" })
+end)
 
 local fzf_lua = require("fzf-lua")
+keymap("n", "<C-f>", fzf_lua.global)
 keymap("n", "<C-p>", fzf_lua.files)
 keymap("n", "<C-g>", fzf_lua.live_grep)
 
