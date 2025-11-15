@@ -5,7 +5,7 @@ vim.o.relativenumber = true
 vim.o.termguicolors = true
 vim.o.signcolumn = "yes"
 vim.o.winborder = "single"
-vim.o.scrolloff = 8
+vim.o.scrolloff = 10
 
 vim.o.wrap = false
 vim.o.smartindent = true

@@ -10,20 +10,26 @@ vim.pack.add({
   { src = "https://github.com/mason-org/mason.nvim" },
   { src = "https://github.com/mason-org/mason-lspconfig.nvim" },
   { src = "https://github.com/neovim/nvim-lspconfig" },
+
+  { src = "https://github.com/nvimtools/none-ls.nvim" },
 })
 require("fidget").setup()
-
-require("typst-preview").setup({
-  dependencies_bin = { ["tinymist"] = "tinymist" },
-})
-
-require("nvim-treesitter.configs").setup({
-  auto_install = true,
-  highlight = { enable = true },
-})
+require("typst-preview").setup({ dependencies_bin = { ["tinymist"] = "tinymist" } })
+require("nvim-treesitter.configs").setup({ auto_install = true, highlight = { enable = true } })
 
 require("mason").setup()
 require("mason-lspconfig").setup()
+
+local null_ls = require("null-ls")
+null_ls.setup({
+  sources = {
+    null_ls.builtins.formatting.stylua,
+    null_ls.builtins.formatting.black,
+    null_ls.builtins.formatting.isort,
+    null_ls.builtins.formatting.prettierd,
+    null_ls.builtins.formatting.rustywind,
+  },
+})
 
 require("blink.cmp").setup({
   fuzzy = { implementation = "prefer_rust_with_warning" },
@@ -81,4 +87,4 @@ keymap("n", "gi", builtin.lsp_implementations)
 keymap("n", "<leader>t", ":TypstPreview<CR>")
 
 -- enable recursively search in current folder in gf, ex. including node_modules
-vim.opt.path:append("**")
+-- vim.opt.path:append("**")

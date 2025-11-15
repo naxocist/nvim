@@ -65,6 +65,10 @@
       "rev": "29c50dd",
       "src": "https://github.com/vieitesss/miniharp.nvim"
     },
+    "none-ls.nvim": {
+      "rev": "5501975",
+      "src": "https://github.com/nvimtools/none-ls.nvim"
+    },
     "nvim-lspconfig": {
       "rev": "a89bfcf",
       "src": "https://github.com/neovim/nvim-lspconfig"
