@@ -3,6 +3,7 @@ vim.pack.add({
   { src = "https://github.com/rose-pine/neovim" },
   { src = "https://github.com/nvim-lualine/lualine.nvim" },
   { src = "https://github.com/RRethy/base16-nvim" },
+  { src = "https://github.com/maxmx03/dracula.nvim" }
 })
 
 require("vague").setup({ italic = false, bold = false, transparent = true })
@@ -13,7 +14,11 @@ require("rose-pine").setup({
     transparency = true,
   },
 })
-vim.cmd("color rose-pine")
+local dracula = require "dracula"
+dracula.setup {
+  transparent = true
+}
+vim.cmd("color dracula")
 
 ---- Remove italics from all highlight groups
 for _, group in ipairs(vim.fn.getcompletion("", "highlight")) do

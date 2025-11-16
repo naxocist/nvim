@@ -6,7 +6,6 @@ vim.o.termguicolors = true
 vim.o.signcolumn = "yes"
 vim.o.winborder = "single"
 vim.o.scrolloff = 10
-vim.o.colorcolumn = "80"
 
 vim.o.wrap = false
 vim.o.smartindent = true
@@ -95,6 +94,9 @@ vim.api.nvim_create_autocmd("FileType", {
   pattern = "*",
   callback = function()
     local ft = vim.bo.filetype
+    if ft == "Fyler" then
+      return
+    end
     local col = ft_colorcolumns[ft] or ft_colorcolumns.default
     vim.opt_local.colorcolumn = col
   end,

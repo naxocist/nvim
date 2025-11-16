@@ -1,7 +1,7 @@
 local keymap = vim.keymap.set
 
 vim.pack.add({
-  { src = "https://github.com/nvim-mini/mini.icons" },
+  { src = "https://github.com/nvim-tree/nvim-web-devicons" },
   { src = "https://github.com/nvim-mini/mini.pairs" },
 
   { src = "https://github.com/A7Lavinraj/fyler.nvim" },
@@ -24,6 +24,7 @@ require("mini.pairs").setup()
 
 local fyler = require("fyler")
 fyler.setup({
+  icon_provider = "nvim_web_devicons",
   default_explorer = true,
   mappings = {
     ["q"] = "CloseView",

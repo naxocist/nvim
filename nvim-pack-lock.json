@@ -21,6 +21,10 @@
       "src": "https://github.com/saghen/blink.cmp",
       "version": "1.0.0 - 2.0.0"
     },
+    "dracula.nvim": {
+      "rev": "7fadc372bbb9638c19a18c2497167d854cdd6a19",
+      "src": "https://github.com/maxmx03/dracula.nvim"
+    },
     "fidget.nvim": {
       "rev": "e32b672",
       "src": "https://github.com/j-hui/fidget.nvim"
@@ -65,10 +69,6 @@
       "rev": "ad7146a",
       "src": "https://github.com/mason-org/mason.nvim"
     },
-    "mini.icons": {
-      "rev": "2847986",
-      "src": "https://github.com/nvim-mini/mini.icons"
-    },
     "mini.pairs": {
       "rev": "b9aada8",
       "src": "https://github.com/nvim-mini/mini.pairs"
@@ -104,6 +104,10 @@
     "nvim-ufo": {
       "rev": "72d54c3",
       "src": "https://github.com/kevinhwang91/nvim-ufo"
+    },
+    "nvim-web-devicons": {
+      "rev": "8dcb311b0c92d460fac00eac706abd43d94d68af",
+      "src": "https://github.com/nvim-tree/nvim-web-devicons"
     },
     "plenary.nvim": {
       "rev": "b9fd522",
