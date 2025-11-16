@@ -25,7 +25,7 @@ require("vercel").setup({
     bufferline = false,
   },
 })
-vim.cmd("color rose-pine")
+vim.cmd("color vague")
 
 -- vim.o.guicursor = "i:ver30-MyInsertCursor"
 -- vim.api.nvim_set_hl(0, "MyInsertCursor", { fg = "#000000", bg = "#FF0000" })

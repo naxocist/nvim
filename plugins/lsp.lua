@@ -6,12 +6,12 @@ vim.pack.add({
   { src = "https://github.com/chomosuke/typst-preview.nvim" },
   { src = "https://github.com/j-hui/fidget.nvim" },
 
-  { src = "https://github.com/mason-org/mason.nvim" },
-  { src = "https://github.com/mason-org/mason-lspconfig.nvim" },
-  { src = "https://github.com/neovim/nvim-lspconfig" },
-
   { src = "https://github.com/nvimtools/none-ls.nvim" },
-  { src = "https://github.com/L3MON4D3/LuaSnip" }
+  { src = "https://github.com/L3MON4D3/LuaSnip" },
+
+  { src = "https://github.com/mason-org/mason.nvim" },
+  { src = "https://github.com/neovim/nvim-lspconfig" },
+  { src = "https://github.com/mason-org/mason-lspconfig.nvim" },
 })
 require("fidget").setup()
 require("typst-preview").setup({ dependencies_bin = { ["tinymist"] = "tinymist" } })
