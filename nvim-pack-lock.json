@@ -12,6 +12,10 @@
       "rev": "3f86702",
       "src": "https://github.com/m4xshen/autoclose.nvim"
     },
+    "base16-nvim": {
+      "rev": "a0d0806ae75ef1ef97d9fc650d96f1f28db241a5",
+      "src": "https://github.com/RRethy/base16-nvim"
+    },
     "blink.cmp": {
       "rev": "327fff9",
       "src": "https://github.com/saghen/blink.cmp",
@@ -94,7 +98,8 @@
       "src": "https://github.com/neovim/nvim-lspconfig"
     },
     "nvim-treesitter": {
-      "rev": "42fc28ba"
+      "rev": "42fc28ba",
+      "src": "https://github.com/nvim-treesitter/nvim-treesitter"
     },
     "nvim-ufo": {
       "rev": "72d54c3",
@@ -117,7 +122,8 @@
       "src": "https://github.com/chomosuke/typst-preview.nvim"
     },
     "vague.nvim": {
-      "rev": "5689afd"
+      "rev": "5689afd",
+      "src": "https://github.com/vague-theme/vague.nvim"
     },
     "vercel.nvim": {
       "rev": "7256709",

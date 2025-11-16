@@ -43,6 +43,7 @@ keymap("n", "<leader>e", function()
 end)
 
 local fzf_lua = require("fzf-lua")
+keymap("n", "<leader>c", fzf_lua.colorschemes)
 keymap("n", "<C-f>", fzf_lua.global)
 keymap("n", "<C-p>", fzf_lua.files)
 keymap("n", "<C-g>", fzf_lua.live_grep)

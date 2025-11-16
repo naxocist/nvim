@@ -6,6 +6,7 @@ vim.o.termguicolors = true
 vim.o.signcolumn = "yes"
 vim.o.winborder = "single"
 vim.o.scrolloff = 10
+vim.o.colorcolumn = "80"
 
 vim.o.wrap = false
 vim.o.smartindent = true
@@ -75,4 +76,26 @@ autocmd("TextYankPost", {
     vim.highlight.on_yank({ higroup = "IncSearch", timeout = 170 })
   end,
   group = highlight_group,
+})
+-- custom colorcolumn
+local ft_colorcolumns = {
+  python = "79",
+  markdown = "100",
+  lua = "120",
+  c = "80",
+  cpp = "80",
+  javascript = "100",
+  typescript = "100",
+  html = "120",
+  default = "80", -- fallback
+}
+
+-- set colorclumn based on ft
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = "*",
+  callback = function()
+    local ft = vim.bo.filetype
+    local col = ft_colorcolumns[ft] or ft_colorcolumns.default
+    vim.opt_local.colorcolumn = col
+  end,
 })

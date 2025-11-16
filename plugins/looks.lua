@@ -1,8 +1,8 @@
 vim.pack.add({
   { src = "https://github.com/vague-theme/vague.nvim" },
-  { src = "https://github.com/tiesen243/vercel.nvim" },
   { src = "https://github.com/rose-pine/neovim" },
   { src = "https://github.com/nvim-lualine/lualine.nvim" },
+  { src = "https://github.com/RRethy/base16-nvim" },
 })
 
 require("vague").setup({ italic = false, bold = false, transparent = true })
@@ -10,22 +10,20 @@ require("rose-pine").setup({
   styles = {
     bold = false,
     italic = false,
-    transparency = true
-  }
-})
-require("vercel").setup({
-  theme = "dark",
-  transparent = true,
-  italics = {
-    comments = true,
-    keywords = false,
-    functions = false,
-    strings = false,
-    variables = false,
-    bufferline = false,
+    transparency = true,
   },
 })
-vim.cmd("color vague")
+vim.cmd("color rose-pine")
+
+---- Remove italics from all highlight groups
+for _, group in ipairs(vim.fn.getcompletion("", "highlight")) do
+  local hl = vim.api.nvim_get_hl(0, { name = group })
+  if hl.italic then
+    hl.italic = nil
+    ---@diagnostic disable-next-line: param-type-mismatch
+    vim.api.nvim_set_hl(0, group, hl)
+  end
+end
 
 -- vim.o.guicursor = "i:ver30-MyInsertCursor"
 -- vim.api.nvim_set_hl(0, "MyInsertCursor", { fg = "#000000", bg = "#FF0000" })
