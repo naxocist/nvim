@@ -125,6 +125,10 @@
       "rev": "64469f8",
       "src": "https://github.com/chomosuke/typst-preview.nvim"
     },
+    "undotree": {
+      "rev": "0f1c9816975b5d7f87d5003a19c53c6fd2ff6f7f",
+      "src": "https://github.com/mbbill/undotree"
+    },
     "vague.nvim": {
       "rev": "5689afd",
       "src": "https://github.com/vague-theme/vague.nvim"

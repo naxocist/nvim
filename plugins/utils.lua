@@ -1,10 +1,10 @@
 local keymap = vim.keymap.set
 
 vim.pack.add({
-  { src = "https://github.com/nvim-tree/nvim-web-devicons" },
   { src = "https://github.com/nvim-mini/mini.pairs" },
 
   { src = "https://github.com/A7Lavinraj/fyler.nvim" },
+  { src = "https://github.com/mbbill/undotree" },
   { src = "https://github.com/ibhagwan/fzf-lua" },
 
   { src = "https://github.com/kevinhwang91/promise-async" },
@@ -14,6 +14,8 @@ vim.pack.add({
   { src = "https://github.com/tpope/vim-fugitive" },
   { src = "https://github.com/folke/flash.nvim" }
 })
+
+keymap("n", "<leader>u", "<cmd>UndotreeToggle<cr>")
 
 local flash = require("flash")
 flash.setup()
