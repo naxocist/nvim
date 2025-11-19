@@ -101,3 +101,10 @@ vim.api.nvim_create_autocmd("FileType", {
     vim.opt_local.colorcolumn = col
   end,
 })
+
+---@diagnostic disable-next-line: duplicate-set-field
+vim.ui.open = function(path)
+  -- Use wslview instead of xdg-open
+  vim.fn.jobstart({ "wslview", path }, { detach = true })
+end
+

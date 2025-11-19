@@ -101,6 +101,10 @@
       "rev": "42fc28ba",
       "src": "https://github.com/nvim-treesitter/nvim-treesitter"
     },
+    "nvim-ts-autotag": {
+      "rev": "c4ca798ab95b316a768d51eaaaee48f64a4a46bc",
+      "src": "https://github.com/windwp/nvim-ts-autotag"
+    },
     "nvim-ufo": {
       "rev": "72d54c3",
       "src": "https://github.com/kevinhwang91/nvim-ufo"

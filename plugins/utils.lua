@@ -12,15 +12,22 @@ vim.pack.add({
 
   { src = "https://github.com/lewis6991/gitsigns.nvim" },
   { src = "https://github.com/tpope/vim-fugitive" },
-  { src = "https://github.com/folke/flash.nvim" }
+  { src = "https://github.com/folke/flash.nvim" },
+  { src = "https://github.com/windwp/nvim-ts-autotag" },
 })
+
+require("nvim-ts-autotag").setup()
 
 keymap("n", "<leader>u", "<cmd>UndotreeToggle<cr>")
 
 local flash = require("flash")
 flash.setup()
-keymap({"n", "x", "o"}, "s", function () flash.jump() end)
-keymap({"n", "x", "o"}, "S", function () flash.treesitter() end)
+keymap({ "n", "x", "o" }, "s", function()
+  flash.jump()
+end)
+keymap({ "n", "x", "o" }, "S", function()
+  flash.treesitter()
+end)
 
 require("mini.pairs").setup()
 
@@ -46,6 +53,14 @@ keymap("n", "<leader>e", function()
 end)
 
 local fzf_lua = require("fzf-lua")
+fzf_lua.setup({
+  winopts = {
+    border = "single",
+    preview = {
+      border = "single"
+    }
+  }
+})
 keymap("n", "<leader>c", fzf_lua.colorschemes)
 keymap("n", "<C-f>", fzf_lua.global)
 keymap("n", "<C-p>", fzf_lua.files)
