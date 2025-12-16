@@ -12,12 +12,15 @@ vim.pack.add({
 
   { src = "https://github.com/lewis6991/gitsigns.nvim" },
   { src = "https://github.com/tpope/vim-fugitive" },
+  { src = "https://github.com/akinsho/git-conflict.nvim" },
   { src = "https://github.com/windwp/nvim-ts-autotag" },
 
   { src = "https://github.com/tpope/vim-dadbod" },
   { src = "https://github.com/kristijanhusak/vim-dadbod-ui" },
   { src = "https://github.com/kristijanhusak/vim-dadbod-completion" },
 })
+
+require("git-conflict").setup()
 
 keymap("n", "<leader>db", "<cmd>DBUI<cr>")
 vim.g.db_ui_use_nerd_fonts = 1

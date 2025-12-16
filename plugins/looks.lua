@@ -15,7 +15,7 @@ require("gruber-darker").setup({
     strings = false
   }
 })
-vim.cmd("color gruber-darker")
+vim.cmd("color vague")
 
 vim.o.guicursor = "i:ver30-MyInsertCursor"
 vim.o.showmode = false
