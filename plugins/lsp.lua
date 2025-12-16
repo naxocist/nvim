@@ -2,7 +2,7 @@ vim.pack.add({
   { src = "https://github.com/nvim-lua/plenary.nvim" },
 
   { src = "https://github.com/nvim-treesitter/nvim-treesitter" },
-  { src = "https://github.com/saghen/blink.cmp", version = vim.version.range("^1") },
+  { src = "https://github.com/saghen/blink.cmp", version = vim.version.range("1.*") },
   { src = "https://github.com/chomosuke/typst-preview.nvim" },
   { src = "https://github.com/j-hui/fidget.nvim" },
 
@@ -13,9 +13,10 @@ vim.pack.add({
   { src = "https://github.com/neovim/nvim-lspconfig" },
   { src = "https://github.com/mason-org/mason-lspconfig.nvim" },
 })
+
 require("fidget").setup()
 require("typst-preview").setup({ dependencies_bin = { ["tinymist"] = "tinymist" } })
-require("nvim-treesitter.configs").setup({ auto_install = true, highlight = { enable = true } })
+require("nvim-treesitter").setup({ auto_install = true, highlight = { enable = true } })
 
 require("mason").setup()
 require("mason-lspconfig").setup()
@@ -90,6 +91,7 @@ require("blink.cmp").setup({
 local keymap = vim.keymap.set
 keymap("n", "<leader>od", vim.diagnostic.open_float)
 keymap("n", "<leader>ca", vim.lsp.buf.code_action)
+keymap("n", "<leader>rf", vim.lsp.buf.references)
 keymap("n", "gd", vim.lsp.buf.definition)
 keymap("n", "gi", vim.lsp.buf.implementation)
 keymap("n", "<leader>t", ":TypstPreview<CR>")

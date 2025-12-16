@@ -12,10 +12,11 @@ require("rose-pine").setup({ styles = { bold = false, italic = false, transparen
 require("gruber-darker").setup({
   bold = false,
   italic = {
-    strings = false
-  }
+    strings = false,
+  },
 })
-vim.cmd("color vague")
+
+vim.cmd("color gruber-darker")
 
 vim.o.guicursor = "i:ver30-MyInsertCursor"
 vim.o.showmode = false

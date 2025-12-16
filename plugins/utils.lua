@@ -2,8 +2,10 @@ local keymap = vim.keymap.set
 
 vim.pack.add({
   { src = "https://github.com/nvim-mini/mini.pairs" },
+  { src = "https://github.com/nvim-mini/mini.icons" },
 
   { src = "https://github.com/A7Lavinraj/fyler.nvim" },
+
   { src = "https://github.com/mbbill/undotree" },
   { src = "https://github.com/ibhagwan/fzf-lua" },
 
@@ -24,7 +26,6 @@ require("git-conflict").setup()
 
 keymap("n", "<leader>db", "<cmd>DBUI<cr>")
 vim.g.db_ui_use_nerd_fonts = 1
--- require("vim-dadbod-completion").setup()
 
 keymap("n", "<leader>u", "<cmd>UndotreeToggle<cr><C-w>h")
 require("nvim-ts-autotag").setup()
@@ -32,19 +33,14 @@ require("mini.pairs").setup()
 
 local fyler = require("fyler")
 fyler.setup({
-  icon_provider = "nvim_web_devicons",
-  default_explorer = true,
-  mappings = {
-    ["q"] = "CloseView",
-    ["<CR>"] = "Select",
-    ["<C-t>"] = "SelectTab",
-    ["|"] = "SelectVSplit",
-    ["-"] = "SelectSplit",
-    ["^"] = "GotoParent",
-    ["="] = "GotoCwd",
-    ["."] = "GotoNode",
-    ["#"] = "CollapseAll",
-    ["<BS>"] = "CollapseNode",
+  integrations = {
+    icon = "nvim_web_devicons",
+  },
+  views = {
+    finder = {
+      default_explorer = true,
+      confirm_simple = true
+    },
   },
 })
 keymap("n", "<leader>e", function()

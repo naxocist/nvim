@@ -48,7 +48,6 @@ keymap("n", "<leader>f", vim.lsp.buf.format)
 keymap("n", "<esc>", ":noh<CR>")
 keymap("n", "<C-d>", "<C-d>zz")
 keymap("n", "<C-u>", "<C-u>zz")
-keymap("n", "<leader>q", ":quit<CR>")
 keymap({ "n", "i" }, "<C-s>", "<ESC>:write<CR>")
 keymap({ "n", "i" }, "<C-a>", "<ESC>gg<S-v>G")
 keymap("v", "sy", '"+y')
@@ -58,9 +57,9 @@ package.path = package.path .. ";" .. vim.fn.stdpath("config") .. "/custom/?.lua
 require("cp")
 
 package.path = package.path .. ";" .. vim.fn.stdpath("config") .. "/plugins/?.lua"
-require("utils")
 require("looks")
 require("lsp")
+require("utils")
 
 -- AUTOCMD
 vim.api.nvim_create_autocmd("TextYankPost", {
@@ -158,7 +157,7 @@ vim.api.nvim_create_autocmd("FileType", {
   pattern = "*",
   callback = function()
     local ft = vim.bo.filetype
-    if ft == "Fyler" or ft == "dbout" then
+    if ft == "oil" or ft == "fyler" or ft == "dbout" then
       return
     end
     local col = ft_colorcolumns[ft] or ft_colorcolumns.default
@@ -171,3 +170,9 @@ vim.ui.open = function(path)
   -- Use wslview instead of xdg-open
   vim.fn.jobstart({ "wslview", path }, { detach = true })
 end
+
+
+-- for a, b in pairs(vim.pack.get()) do
+--   print(b.spec.name)
+--   -- vim.pack.del({b.spec.name})
+-- end
