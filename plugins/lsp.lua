@@ -29,10 +29,11 @@ null_ls.setup({
     null_ls.builtins.formatting.prettierd,
     null_ls.builtins.formatting.rustywind,
     null_ls.builtins.formatting.gofmt,
+    null_ls.builtins.formatting.google_java_format,
   },
 })
 
-require("luasnip.loaders.from_vscode").lazy_load({ paths = { "./snippets" }})
+require("luasnip.loaders.from_vscode").lazy_load({ paths = { "./snippets" } })
 require("blink.cmp").setup({
   fuzzy = { implementation = "prefer_rust_with_warning" },
   signature = { enabled = true },
@@ -75,7 +76,15 @@ require("blink.cmp").setup({
     },
   },
 
-  sources = { default = { "lsp", "snippets" } },
+  sources = {
+    default = { "lsp", "snippets", "path" },
+    per_filetype = {
+      sql = { "snippets", "dadbod", "buffer" },
+    },
+    providers = {
+      dadbod = { name = "Dadbod", module = "vim_dadbod_completion.blink" },
+    },
+  },
 })
 
 local keymap = vim.keymap.set
@@ -84,4 +93,3 @@ keymap("n", "<leader>ca", vim.lsp.buf.code_action)
 keymap("n", "gd", vim.lsp.buf.definition)
 keymap("n", "gi", vim.lsp.buf.implementation)
 keymap("n", "<leader>t", ":TypstPreview<CR>")
-

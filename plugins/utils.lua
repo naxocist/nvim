@@ -12,23 +12,19 @@ vim.pack.add({
 
   { src = "https://github.com/lewis6991/gitsigns.nvim" },
   { src = "https://github.com/tpope/vim-fugitive" },
-  { src = "https://github.com/folke/flash.nvim" },
   { src = "https://github.com/windwp/nvim-ts-autotag" },
+
+  { src = "https://github.com/tpope/vim-dadbod" },
+  { src = "https://github.com/kristijanhusak/vim-dadbod-ui" },
+  { src = "https://github.com/kristijanhusak/vim-dadbod-completion" },
 })
 
+keymap("n", "<leader>db", "<cmd>DBUI<cr>")
+vim.g.db_ui_use_nerd_fonts = 1
+-- require("vim-dadbod-completion").setup()
+
+keymap("n", "<leader>u", "<cmd>UndotreeToggle<cr><C-w>h")
 require("nvim-ts-autotag").setup()
-
-keymap("n", "<leader>u", "<cmd>UndotreeToggle<cr>")
-
-local flash = require("flash")
-flash.setup()
-keymap({ "n", "x", "o" }, "s", function()
-  flash.jump()
-end)
-keymap({ "n", "x", "o" }, "S", function()
-  flash.treesitter()
-end)
-
 require("mini.pairs").setup()
 
 local fyler = require("fyler")
@@ -57,11 +53,12 @@ fzf_lua.setup({
   winopts = {
     border = "single",
     preview = {
-      border = "single"
-    }
-  }
+      border = "single",
+    },
+  },
 })
-keymap("n", "<leader>c", fzf_lua.colorschemes)
+
+keymap("n", "<leader>co", fzf_lua.colorschemes)
 keymap("n", "<C-f>", fzf_lua.global)
 keymap("n", "<C-p>", fzf_lua.files)
 keymap("n", "<C-g>", fzf_lua.live_grep)
