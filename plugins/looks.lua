@@ -16,11 +16,8 @@ require("gruber-darker").setup({
   },
 })
 
-vim.cmd("color gruber-darker")
-
-vim.o.guicursor = "i:ver30-MyInsertCursor"
+vim.cmd("color rose-pine")
 vim.o.showmode = false
--- vim.api.nvim_set_hl(0, "MyInsertCursor", { fg = "#000000", bg = "#FF0000" })
 
 require("lualine").setup({
   options = {

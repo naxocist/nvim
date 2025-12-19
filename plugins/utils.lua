@@ -39,7 +39,7 @@ fyler.setup({
   views = {
     finder = {
       default_explorer = true,
-      confirm_simple = true
+      confirm_simple = true,
     },
   },
 })

@@ -34,11 +34,11 @@ vim.diagnostic.config({
 local keymap = vim.keymap.set
 
 -- Move down, but use 'gj' if no count is given
-keymap("n", "j", function()
+keymap({"n", "v"}, "j", function()
   return tonumber(vim.api.nvim_get_vvar("count")) > 0 and "j" or "gj"
 end, { expr = true, silent = true })
 -- Move up, but use 'gk' if no count is given
-keymap("n", "k", function()
+keymap({"n", "v"}, "k", function()
   return tonumber(vim.api.nvim_get_vvar("count")) > 0 and "k" or "gk"
 end, { expr = true, silent = true })
 
@@ -52,6 +52,13 @@ keymap({ "n", "i" }, "<C-s>", "<ESC>:write<CR>")
 keymap({ "n", "i" }, "<C-a>", "<ESC>gg<S-v>G")
 keymap("v", "sy", '"+y')
 keymap("n", "<leader>wai", "<CMD>echo expand('%:p')<CR>") -- where am i?
+
+keymap("n", "<A-j>", ":m .+1<CR>==")
+keymap("n", "<A-k>", ":m .-2<CR>==")
+keymap("v", "<A-j>", ":m '>+1<CR>gv=gv")
+keymap("v", "<A-k>", ":m '<-2<CR>gv=gv")
+keymap("v", ">", ">gv")
+keymap("v", "<", "<gv")
 
 package.path = package.path .. ";" .. vim.fn.stdpath("config") .. "/custom/?.lua"
 require("cp")
@@ -139,28 +146,15 @@ vim.api.nvim_create_autocmd("CursorMovedI", {
   end,
 })
 
--- custom colorcolumn
-local ft_colorcolumns = {
-  python = "79",
-  markdown = "100",
-  lua = "120",
-  c = "80",
-  cpp = "80",
-  javascript = "100",
-  typescript = "100",
-  html = "120",
-  default = "80", -- fallback
-}
-
 -- set colorclumn based on ft
 vim.api.nvim_create_autocmd("FileType", {
   pattern = "*",
   callback = function()
     local ft = vim.bo.filetype
-    if ft == "oil" or ft == "fyler" or ft == "dbout" then
+    if ft == "oil" or ft == "fyler" or ft == "dbout" or ft == "typst" then
       return
     end
-    local col = ft_colorcolumns[ft] or ft_colorcolumns.default
+    local col = "100"
     vim.opt_local.colorcolumn = col
   end,
 })
