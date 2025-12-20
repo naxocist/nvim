@@ -16,10 +16,17 @@ vim.pack.add({
 
 require("fidget").setup()
 require("typst-preview").setup({ dependencies_bin = { ["tinymist"] = "tinymist" } })
-require("nvim-treesitter").setup({ auto_install = true, highlight = { enable = true } })
 
 require("mason").setup()
 require("mason-lspconfig").setup()
+
+local need_hl = { "go", "cpp", "c", "bash", "javascript", "typescript", "python", "matlab", "typst" }
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = need_hl,
+  callback = function()
+    vim.treesitter.start()
+  end,
+})
 
 local null_ls = require("null-ls")
 null_ls.setup({
@@ -88,10 +95,9 @@ require("blink.cmp").setup({
   },
 })
 
-local keymap = vim.keymap.set
-keymap("n", "<leader>od", vim.diagnostic.open_float)
-keymap("n", "<leader>ca", vim.lsp.buf.code_action)
-keymap("n", "<leader>rf", vim.lsp.buf.references)
-keymap("n", "gd", vim.lsp.buf.definition)
-keymap("n", "gi", vim.lsp.buf.implementation)
-keymap("n", "<leader>t", ":TypstPreview<CR>")
+vim.keymap.set("n", "<leader>od", vim.diagnostic.open_float)
+vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action)
+vim.keymap.set("n", "<leader>rf", vim.lsp.buf.references)
+vim.keymap.set("n", "gd", vim.lsp.buf.definition)
+vim.keymap.set("n", "gi", vim.lsp.buf.implementation)
+vim.keymap.set("n", "<leader>t", ":TypstPreview<CR>")

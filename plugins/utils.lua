@@ -1,5 +1,3 @@
-local keymap = vim.keymap.set
-
 vim.pack.add({
   { src = "https://github.com/nvim-mini/mini.pairs" },
   { src = "https://github.com/nvim-mini/mini.icons" },
@@ -17,17 +15,34 @@ vim.pack.add({
   { src = "https://github.com/akinsho/git-conflict.nvim" },
   { src = "https://github.com/windwp/nvim-ts-autotag" },
 
+  { src = "https://github.com/ThePrimeagen/harpoon", version = "harpoon2" },
+
   { src = "https://github.com/tpope/vim-dadbod" },
   { src = "https://github.com/kristijanhusak/vim-dadbod-ui" },
   { src = "https://github.com/kristijanhusak/vim-dadbod-completion" },
 })
 
+local harpoon = require("harpoon")
+harpoon:setup()
+vim.keymap.set("n", "<leader>a", function() harpoon:list():add() end)
+vim.keymap.set("n", "<C-e>", function() harpoon.ui:toggle_quick_menu(harpoon:list()) end)
+vim.keymap.set("n", "<C-h>", function() harpoon:list():select(1) end)
+vim.keymap.set("n", "<C-j>", function() harpoon:list():select(2) end)
+vim.keymap.set("n", "<C-k>", function() harpoon:list():select(3) end)
+vim.keymap.set("n", "<C-l>", function() harpoon:list():select(4) end)
+
+-- Toggle previous & next buffers stored within Harpoon list
+-- vim.keymap.set("n", "<C-S-P>", function() harpoon:list():prev() end)
+-- vim.keymap.set("n", "<C-S-N>", function() harpoon:list():next() end)
+
+
+
 require("git-conflict").setup()
 
-keymap("n", "<leader>db", "<cmd>DBUI<cr>")
+vim.keymap.set("n", "<leader>db", "<cmd>DBUI<cr>")
 vim.g.db_ui_use_nerd_fonts = 1
 
-keymap("n", "<leader>u", "<cmd>UndotreeToggle<cr><C-w>h")
+vim.keymap.set("n", "<leader>u", "<cmd>UndotreeToggle<cr><C-w>h")
 require("nvim-ts-autotag").setup()
 require("mini.pairs").setup()
 
@@ -43,7 +58,7 @@ fyler.setup({
     },
   },
 })
-keymap("n", "<leader>e", function()
+vim.keymap.set("n", "<leader>e", function()
   fyler.toggle({ kind = "float" })
 end)
 
@@ -57,17 +72,17 @@ fzf_lua.setup({
   },
 })
 
-keymap("n", "<leader>co", fzf_lua.colorschemes)
-keymap("n", "<C-f>", fzf_lua.global)
-keymap("n", "<C-p>", fzf_lua.files)
-keymap("n", "<C-g>", fzf_lua.live_grep)
+vim.keymap.set("n", "<leader>co", fzf_lua.colorschemes)
+vim.keymap.set("n", "<C-f>", fzf_lua.global)
+vim.keymap.set("n", "<C-p>", fzf_lua.files)
+vim.keymap.set("n", "<C-g>", fzf_lua.live_grep)
 
 vim.o.foldcolumn = "0" -- '0' is not bad
 vim.o.foldlevel = 99 -- Using ufo provider need a large value, feel free to decrease the value
 vim.o.foldlevelstart = 99
 vim.o.foldenable = true
-keymap("n", "zR", require("ufo").openAllFolds)
-keymap("n", "zM", require("ufo").closeAllFolds)
+vim.keymap.set("n", "zR", require("ufo").openAllFolds)
+vim.keymap.set("n", "zM", require("ufo").closeAllFolds)
 local handler = function(virtText, lnum, endLnum, width, truncate)
   local newVirtText = {}
   local suffix = (" 󰁂 %d "):format(endLnum - lnum)

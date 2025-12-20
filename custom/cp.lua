@@ -10,8 +10,6 @@ local timelimit_seconds = 2
 local max_output_chars = 5000
 local compile_flags = "-O2 -std=c++17"
 
-local keymap = vim.keymap.set
-
 local function toggle_output()
   if input_buf and vim.api.nvim_buf_is_valid(input_buf) then
     vim.api.nvim_buf_delete(input_buf, { force = true })
@@ -142,8 +140,8 @@ local function compile_run_cpp()
   print(msg)
 end
 
-keymap("n", "<leader>i", toggle_output)
-keymap("n", "<leader>r", compile_run_cpp, { noremap = true, silent = true })
+vim.keymap.set("n", "<leader>i", toggle_output)
+vim.keymap.set("n", "<leader>r", compile_run_cpp, { noremap = true, silent = true })
 
 -- # TESTCASE MANAGEMENT in plain text
 local separator = ">>>>>>>>>>>>>"
@@ -168,12 +166,12 @@ local function feedkeys(cmd)
 end
 
 -- add blank testcase (insert mode)
-keymap("n", "ti", function()
+vim.keymap.set("n", "ti", function()
   local cmd = "ggO" .. separator .. "<ESC>O"
   feedkeys(cmd)
 end)
 -- edit testcase (insert mode)
-keymap("n", "te", function()
+vim.keymap.set("n", "te", function()
   local start, stop = find_separators()
   if not start or not stop then
     return
@@ -187,14 +185,14 @@ keymap("n", "te", function()
   feedkeys(cmd)
 end)
 -- add testcase
-keymap("n", "ta", function()
+vim.keymap.set("n", "ta", function()
   -- string from trimmed system clipboard
   local trimmed = vim.fn.getreg("+"):gsub("^%s+", ""):gsub("%s+$", "")
   local cmd = "ggO" .. separator .. "<ESC>O" .. trimmed .. "<ESC>"
   feedkeys(cmd)
 end)
 -- delete testcase
-keymap("n", "td", function()
+vim.keymap.set("n", "td", function()
   local start, stop = find_separators()
   if not start or not stop then
     return
@@ -208,7 +206,7 @@ keymap("n", "td", function()
   feedkeys(cmd)
 end)
 -- choose testcase
-keymap("n", "tu", function()
+vim.keymap.set("n", "tu", function()
   local start, stop = find_separators()
   if not start or not stop then
     return

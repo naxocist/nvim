@@ -30,35 +30,32 @@ vim.diagnostic.config({
   signs = true,
 })
 
--- KEYMAPS
-local keymap = vim.keymap.set
-
 -- Move down, but use 'gj' if no count is given
-keymap({"n", "v"}, "j", function()
+vim.keymap.set({ "n", "v" }, "j", function()
   return tonumber(vim.api.nvim_get_vvar("count")) > 0 and "j" or "gj"
 end, { expr = true, silent = true })
 -- Move up, but use 'gk' if no count is given
-keymap({"n", "v"}, "k", function()
+vim.keymap.set({ "n", "v" }, "k", function()
   return tonumber(vim.api.nvim_get_vvar("count")) > 0 and "k" or "gk"
 end, { expr = true, silent = true })
 
-keymap("n", "<leader>pu", vim.pack.update)
-keymap("n", "<leader>f", vim.lsp.buf.format)
+vim.keymap.set("n", "<leader>pu", vim.pack.update)
+vim.keymap.set("n", "<leader>f", vim.lsp.buf.format)
 
-keymap("n", "<esc>", ":noh<CR>")
-keymap("n", "<C-d>", "<C-d>zz")
-keymap("n", "<C-u>", "<C-u>zz")
-keymap({ "n", "i" }, "<C-s>", "<ESC>:write<CR>")
-keymap({ "n", "i" }, "<C-a>", "<ESC>gg<S-v>G")
-keymap("v", "sy", '"+y')
-keymap("n", "<leader>wai", "<CMD>echo expand('%:p')<CR>") -- where am i?
+vim.keymap.set("n", "<esc>", ":noh<CR>")
+vim.keymap.set("n", "<C-d>", "<C-d>zz")
+vim.keymap.set("n", "<C-u>", "<C-u>zz")
+vim.keymap.set({ "n", "i" }, "<C-s>", "<ESC>:write<CR>")
+vim.keymap.set({ "n", "i" }, "<C-a>", "<ESC>gg<S-v>G")
+vim.keymap.set("v", "sy", '"+y')
+vim.keymap.set("n", "<leader>wai", "<CMD>echo expand('%:p')<CR>") -- where am i?
 
-keymap("n", "<A-j>", ":m .+1<CR>==")
-keymap("n", "<A-k>", ":m .-2<CR>==")
-keymap("v", "<A-j>", ":m '>+1<CR>gv=gv")
-keymap("v", "<A-k>", ":m '<-2<CR>gv=gv")
-keymap("v", ">", ">gv")
-keymap("v", "<", "<gv")
+vim.keymap.set("n", "<A-j>", ":m .+1<CR>==")
+vim.keymap.set("n", "<A-k>", ":m .-2<CR>==")
+vim.keymap.set("v", "<A-j>", ":m '>+1<CR>gv=gv")
+vim.keymap.set("v", "<A-k>", ":m '<-2<CR>gv=gv")
+vim.keymap.set("v", ">", ">gv")
+vim.keymap.set("v", "<", "<gv")
 
 package.path = package.path .. ";" .. vim.fn.stdpath("config") .. "/custom/?.lua"
 require("cp")
@@ -164,7 +161,6 @@ vim.ui.open = function(path)
   -- Use wslview instead of xdg-open
   vim.fn.jobstart({ "wslview", path }, { detach = true })
 end
-
 
 -- for a, b in pairs(vim.pack.get()) do
 --   print(b.spec.name)
