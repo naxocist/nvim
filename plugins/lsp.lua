@@ -20,7 +20,7 @@ require("typst-preview").setup({ dependencies_bin = { ["tinymist"] = "tinymist" 
 require("mason").setup()
 require("mason-lspconfig").setup()
 
-local need_hl = { "go", "cpp", "c", "bash", "javascript", "typescript", "python", "matlab", "typst" }
+local need_hl = { "go", "cpp", "c", "bash", "javascript", "typescript", "python", "matlab", "typst", "make" }
 vim.api.nvim_create_autocmd("FileType", {
   pattern = need_hl,
   callback = function()
@@ -38,6 +38,7 @@ null_ls.setup({
     null_ls.builtins.formatting.rustywind,
     null_ls.builtins.formatting.gofmt,
     null_ls.builtins.formatting.google_java_format,
+    null_ls.builtins.formatting.clang_format,
   },
 })
 
