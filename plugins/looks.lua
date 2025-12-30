@@ -1,7 +1,6 @@
 vim.pack.add({
   { src = "https://github.com/vague-theme/vague.nvim" },
   { src = "https://github.com/rose-pine/neovim" },
-  { src = "https://github.com/blazkowolf/gruber-darker.nvim" },
 
   { src = "https://github.com/nvim-lualine/lualine.nvim" },
   { src = "https://github.com/nvim-tree/nvim-web-devicons" },
@@ -9,14 +8,8 @@ vim.pack.add({
 
 require("vague").setup({ italic = false, bold = false, transparent = true })
 require("rose-pine").setup({ styles = { bold = false, italic = false, transparency = true } })
-require("gruber-darker").setup({
-  bold = false,
-  italic = {
-    strings = false,
-  },
-})
 
-vim.cmd("color rose-pine")
+vim.cmd("color vague")
 vim.o.showmode = false
 
 require("lualine").setup({
@@ -29,9 +22,13 @@ require("lualine").setup({
   sections = {
     lualine_a = { "mode" },
     lualine_b = { "branch", "diff", "diagnostics" },
-    lualine_c = { "filename" },
+    lualine_c = { {
+      "filename",
+      path = 1,
+      file_status = true,
+    } },
     lualine_x = { "lsp_status" },
-    lualine_y = { "fileformat" },
-    lualine_z = { "encoding" },
+    lualine_y = { "filetype", "encoding" },
+    lualine_z = { "fileformat" },
   },
 })
