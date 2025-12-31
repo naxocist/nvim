@@ -7,7 +7,7 @@ return {
       require("vague").setup({
         bold = true,
         italic = false,
-        -- transparent = true,
+        transparent = true,
       })
       vim.cmd("colorscheme vague")
     end,
@@ -31,8 +31,8 @@ return {
           file_status = true,
         } },
         lualine_x = { "lsp_status" },
-        lualine_y = { "filetype", "encoding" },
-        lualine_z = { "fileformat" },
+        lualine_y = { "fileformat" },
+        lualine_z = { "filetype", "encoding" },
       },
     },
   },

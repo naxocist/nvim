@@ -35,6 +35,12 @@ return {
           finder = {
             default_explorer = true,
             confirm_simple = true,
+            win = {
+              win_opts = {
+                number = true,
+                relativenumber = true
+              },
+            },
           },
         },
       })
