@@ -7,7 +7,7 @@ return {
       require("vague").setup({
         bold = true,
         italic = false,
-        transparent = true,
+        transparent = false,
       })
       vim.cmd("colorscheme vague")
     end,
@@ -18,7 +18,7 @@ return {
     opts = {
       options = {
         icons_enabled = false,
-        theme = "auto",
+        theme = "tomorrow_night",
         component_separators = { left = "", right = "" },
         section_separators = { left = "", right = "" },
       },
@@ -27,7 +27,7 @@ return {
         lualine_b = { "branch", "diff", "diagnostics" },
         lualine_c = { {
           "filename",
-          path = 1,
+          path = 4,
           file_status = true,
         } },
         lualine_x = { "lsp_status" },

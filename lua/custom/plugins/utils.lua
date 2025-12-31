@@ -38,7 +38,7 @@ return {
             win = {
               win_opts = {
                 number = true,
-                relativenumber = true
+                relativenumber = true,
               },
             },
           },
@@ -46,7 +46,8 @@ return {
       })
 
       vim.keymap.set("n", "<leader>e", function()
-        fyler.toggle({ kind = "float" })
+        -- fyler.toggle({ kind = "float" })
+        fyler.toggle()
       end)
     end,
   },
