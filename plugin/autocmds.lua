@@ -1,10 +1,11 @@
 -- highlight on yank
+vim.api.nvim_set_hl(0, "YankHighlight", { bg = "#ffffff", fg = "#000000" })
 vim.api.nvim_create_autocmd("TextYankPost", {
   group = vim.api.nvim_create_augroup("highlight_yank", { clear = true }),
   pattern = "*",
   desc = "highlight selection on yank",
   callback = function()
-    vim.highlight.on_yank({ timeout = 200, visual = true })
+    vim.highlight.on_yank({ timeout = 100, visual = true, higroup = "YankHighlight" })
   end,
 })
 
@@ -24,9 +25,13 @@ vim.api.nvim_create_autocmd("BufReadPost", {
 })
 
 -- verticle split help
-vim.api.nvim_create_autocmd("FileType", {
-  pattern = "help",
-  command = "wincmd L",
+vim.api.nvim_create_autocmd("BufWinEnter", {
+  pattern = "*.txt",
+  callback = function ()
+    if vim.bo.filetype == "help" then
+      vim.cmd("wincmd L")
+    end
+  end
 })
 
 -- auto resize when terminal resize
@@ -41,6 +46,28 @@ vim.api.nvim_create_autocmd("FileType", {
     vim.opt_local.formatoptions:remove({ "c", "r", "o" })
   end,
 })
+
+-- set colorclumn based on ft
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = "*",
+  callback = function()
+    local excluded_fts = {
+      oil = true,
+      fyler = true,
+      dbout = true,
+      typst = true,
+    }
+
+    local ft = vim.bo.filetype
+    if excluded_fts[ft] then
+      return
+    end
+
+    local col = "100"
+    vim.opt_local.colorcolumn = col
+  end,
+})
+
 
 -- ide like highlight when stopping cursor
 vim.api.nvim_create_autocmd("CursorMoved", {
@@ -76,29 +103,3 @@ vim.api.nvim_create_autocmd("CursorMovedI", {
   end,
 })
 
--- set colorclumn based on ft
-vim.api.nvim_create_autocmd("FileType", {
-  pattern = "*",
-  callback = function()
-    local excluded_fts = {
-      oil = true,
-      fyler = true,
-      dbout = true,
-      typst = true,
-    }
-
-    local ft = vim.bo.filetype
-    if excluded_fts[ft] then
-      return
-    end
-
-    local col = "100"
-    vim.opt_local.colorcolumn = col
-  end,
-})
-
----@diagnostic disable-next-line: duplicate-set-field
-vim.ui.open = function(path)
-  -- Use wslview instead of xdg-open
-  vim.fn.jobstart({ "wslview", path }, { detach = true })
-end
