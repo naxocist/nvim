@@ -23,3 +23,8 @@ end, { expr = true, silent = true })
 vim.keymap.set({ "n", "v" }, "k", function()
   return tonumber(vim.api.nvim_get_vvar("count")) > 0 and "k" or "gk"
 end, { expr = true, silent = true })
+
+vim.keymap.set("n", "<M-,>", "<c-w>5<")
+vim.keymap.set("n", "<M-.>", "<c-w>5>")
+vim.keymap.set("n", "<M-t>", "<C-W>+")
+vim.keymap.set("n", "<M-s>", "<C-W>-")
