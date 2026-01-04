@@ -1,5 +1,19 @@
 return {
   {
+    "rose-pine/neovim",
+    lazy = false,
+    priority = 1000,
+    config = function()
+      require("rose-pine").setup({
+        styles = {
+          italic = false,
+          transparency = true
+        }
+      })
+      -- vim.cmd("colorscheme rose-pine-moon")
+    end,
+  },
+  {
     "vague-theme/vague.nvim",
     lazy = false,
     priority = 1000,
@@ -7,7 +21,7 @@ return {
       require("vague").setup({
         bold = true,
         italic = false,
-        transparent = false,
+        transparent = true,
       })
       vim.cmd("colorscheme vague")
     end,
