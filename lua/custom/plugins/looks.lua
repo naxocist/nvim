@@ -7,8 +7,8 @@ return {
       require("rose-pine").setup({
         styles = {
           italic = false,
-          transparency = true
-        }
+          transparency = true,
+        },
       })
       -- vim.cmd("colorscheme rose-pine-moon")
     end,
@@ -24,6 +24,17 @@ return {
         transparent = true,
       })
       vim.cmd("colorscheme vague")
+    end,
+  },
+  {
+    "shellRaining/hlchunk.nvim",
+    event = { "BufReadPre", "BufNewFile" },
+    config = function()
+      require("hlchunk").setup({
+        chunk = {
+          enable = true
+        }
+      })
     end,
   },
   {
