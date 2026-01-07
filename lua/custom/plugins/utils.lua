@@ -51,6 +51,7 @@ return {
       end)
     end,
   },
+  { "windwp/nvim-ts-autotag", opts = {} },
   { "nvim-mini/mini.pairs", opts = {} },
   { "akinsho/git-conflict.nvim", version = "*", config = true },
   {

@@ -32,8 +32,14 @@ return {
     config = function()
       require("hlchunk").setup({
         chunk = {
-          enable = true
-        }
+          enable = true,
+          style = { { fg = "#57ffff" } },
+          chars = {
+            left_top = "┌",
+            left_bottom = "└",
+          },
+          delay = 100
+        },
       })
     end,
   },
