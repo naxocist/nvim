@@ -1,22 +1,20 @@
 return {
-  "nvimtools/none-ls.nvim",
-  dependencies = {
-    "nvim-lua/plenary.nvim",
-  },
-  config = function()
-    local null_ls = require("null-ls")
+  {
+    "stevearc/conform.nvim",
+    config = function()
+      require("conform").setup({
+        formatters_by_ft = {
+          lua = { "stylua" },
+          python = { "isort", "black" },
+          rust = { "rustfmt", lsp_format = "fallback" },
+          javascript = { "prettierd", "prettier", stop_after_first = true },
+          typescript = { "prettierd", "prettier", stop_after_first = true },
+        },
+      })
 
-    null_ls.setup({
-      sources = {
-        null_ls.builtins.formatting.stylua,
-        null_ls.builtins.formatting.black,
-        null_ls.builtins.formatting.isort,
-        null_ls.builtins.formatting.prettierd,
-        null_ls.builtins.formatting.rustywind,
-        null_ls.builtins.formatting.gofmt,
-        null_ls.builtins.formatting.google_java_format,
-        null_ls.builtins.formatting.clang_format,
-      },
-    })
-  end,
+      vim.keymap.set("n", "<leader>f", function()
+        require("conform").format()
+      end)
+    end,
+  },
 }
