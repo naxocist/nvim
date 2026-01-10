@@ -152,7 +152,14 @@ local function find_separators()
   local cur_line = vim.fn.line(".") -- current cursor line
   local line_text = vim.fn.getline(cur_line) -- text of current line
 
-  if not start or not stop or start > stop or start == -1 or stop == -1 or line_text == separator then
+  if
+    not start
+    or not stop
+    or start > stop
+    or start == -1
+    or stop == -1
+    or line_text == separator
+  then
     print("Invalid Testcase")
     return nil, nil
   end
@@ -217,4 +224,3 @@ vim.keymap.set("n", "tu", function()
     feedkeys(cmd)
   end
 end)
-

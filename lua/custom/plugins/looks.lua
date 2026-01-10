@@ -10,7 +10,7 @@ return {
           transparency = true,
         },
       })
-      vim.cmd("colorscheme rose-pine-moon")
+      -- vim.cmd("colorscheme rose-pine-moon")
     end,
   },
   {
@@ -23,7 +23,7 @@ return {
         italic = false,
         transparent = true,
       })
-      -- vim.cmd("colorscheme vague")
+      vim.cmd("colorscheme vague")
     end,
   },
   {

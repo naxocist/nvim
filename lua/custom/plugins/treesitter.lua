@@ -6,7 +6,9 @@ return {
       "<leader>j", -- join
       "<leader>s", -- split
     },
-    dependencies = { { "nvim-treesitter/nvim-treesitter", lazy = false, build = ":TSUpdate", branch = "main" } },
+    dependencies = {
+      { "nvim-treesitter/nvim-treesitter", lazy = false, build = ":TSUpdate", branch = "main" },
+    },
     opts = {},
   },
   {
