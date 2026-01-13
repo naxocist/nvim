@@ -56,7 +56,7 @@ return {
     opts = {
       options = {
         icons_enabled = false,
-        theme = "tomorrow_night",
+        theme = "auto",
         component_separators = { left = "", right = "" },
         section_separators = { left = "", right = "" },
       },
@@ -75,5 +75,38 @@ return {
         lualine_z = { "filetype", "encoding" },
       },
     },
+  },
+  {
+    "folke/noice.nvim",
+    event = "VeryLazy",
+    dependencies = { "MunifTanjim/nui.nvim" },
+    config = function()
+      require("noice").setup({
+        cmdline = { enabled = false },
+        messages = { enabled = false },
+        popupmenu = { enabled = false },
+
+        lsp = {
+          override = {
+            ["vim.lsp.util.convert_input_to_markdown_lines"] = true,
+            ["vim.lsp.util.stylize_markdown"] = true,
+          },
+          hover = {
+            opts = { border = "single" },
+          },
+          signature = {
+            opts = { border = "single" },
+          },
+        },
+
+        presets = {
+          bottom_search = true,
+          command_palette = true,
+          long_message_to_split = true,
+          inc_rename = false,
+          lsp_doc_border = false,
+        },
+      })
+    end,
   },
 }
