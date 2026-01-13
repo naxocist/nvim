@@ -5,7 +5,7 @@ vim.o.signcolumn = "yes"
 vim.o.winborder = "single"
 vim.o.scrolloff = 10
 
-vim.o.wrap = false
+vim.o.wrap = true
 vim.o.smartindent = true
 vim.o.ignorecase = true
 vim.o.incsearch = true

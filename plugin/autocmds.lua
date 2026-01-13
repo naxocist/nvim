@@ -56,6 +56,8 @@ vim.api.nvim_create_autocmd("FileType", {
       fyler = true,
       dbout = true,
       typst = true,
+      markdown = true,
+      help = true,
     }
 
     local ft = vim.bo.filetype

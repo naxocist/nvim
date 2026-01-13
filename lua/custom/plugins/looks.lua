@@ -9,8 +9,15 @@ return {
           italic = false,
           transparency = true,
         },
+        highlight_groups = {
+          GitSignsAdd = { fg = "#b7ffa1", bg = "none" },
+          GitSignsChange = { fg = "#f3ff85", bg = "none" },
+          GitSignsDelete = { fg = "#ff6b6b", bg = "none" },
+
+          SignColumn = { bg = "none" },
+        },
       })
-      -- vim.cmd("colorscheme rose-pine-moon")
+      vim.cmd("colorscheme rose-pine-moon")
     end,
   },
   {
@@ -23,7 +30,7 @@ return {
         italic = false,
         transparent = true,
       })
-      vim.cmd("colorscheme vague")
+      -- vim.cmd("colorscheme vague")
     end,
   },
   {
@@ -38,7 +45,7 @@ return {
             left_top = "┌",
             left_bottom = "└",
           },
-          delay = 100
+          delay = 100,
         },
       })
     end,
@@ -56,11 +63,13 @@ return {
       sections = {
         lualine_a = { "mode" },
         lualine_b = { "branch", "diff", "diagnostics" },
-        lualine_c = { {
-          "filename",
-          path = 4,
-          file_status = true,
-        } },
+        lualine_c = {
+          {
+            "filename",
+            path = 4,
+            file_status = true,
+          },
+        },
         lualine_x = { "lsp_status" },
         lualine_y = { "fileformat" },
         lualine_z = { "filetype", "encoding" },

@@ -15,7 +15,7 @@ return {
     "nvim-treesitter/nvim-treesitter-context",
     dependencies = "nvim-treesitter/nvim-treesitter",
     config = function()
-      -- vim.api.nvim_set_hl(0, "TreesitterContext", { bg = "#242424" })
+      vim.api.nvim_set_hl(0, "TreesitterContext", { bg = "#242424" })
     end,
   },
   {
