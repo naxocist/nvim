@@ -1,3 +1,7 @@
+local gitGreen = "#b7ffa1"
+local gitYellow = "#f3ff85"
+local gitRed = "#ff6b6b"
+
 return {
   {
     "rose-pine/neovim",
@@ -10,10 +14,9 @@ return {
           transparency = true,
         },
         highlight_groups = {
-          GitSignsAdd = { fg = "#b7ffa1", bg = "none" },
-          GitSignsChange = { fg = "#f3ff85", bg = "none" },
-          GitSignsDelete = { fg = "#ff6b6b", bg = "none" },
-
+          GitSignsAdd = { fg = gitGreen, bg = "none" },
+          GitSignsChange = { fg = gitYellow, bg = "none" },
+          GitSignsDelete = { fg = gitRed, bg = "none" },
           SignColumn = { bg = "none" },
         },
       })
@@ -23,7 +26,7 @@ return {
   {
     "vague-theme/vague.nvim",
     lazy = false,
-    priority = 1000,
+    priority = 500,
     config = function()
       require("vague").setup({
         bold = true,

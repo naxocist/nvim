@@ -7,7 +7,7 @@ return {
       "<leader>s", -- split
     },
     dependencies = {
-      { "nvim-treesitter/nvim-treesitter", lazy = false, build = ":TSUpdate", branch = "main" },
+      { "nvim-treesitter/nvim-treesitter", lazy = true, build = ":TSUpdate", branch = "main" },
     },
     opts = {},
   },

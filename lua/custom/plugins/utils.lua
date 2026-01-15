@@ -1,7 +1,6 @@
 return {
   {
     "ibhagwan/fzf-lua",
-    lazy = false,
     dependencies = { "nvim-tree/nvim-web-devicons" },
     config = function()
       local fzf_lua = require("fzf-lua")
@@ -56,7 +55,6 @@ return {
   { "akinsho/git-conflict.nvim", version = "*", config = true },
   {
     "folke/flash.nvim",
-    event = "VeryLazy",
     config = function()
       require("flash").setup()
 
