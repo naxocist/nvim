@@ -2,9 +2,9 @@ return {
   {
     "Wansmer/treesj",
     keys = {
-      "<leader>m", -- toggle split/join
-      "<leader>j", -- join
-      "<leader>s", -- split
+      "<leader>tm", -- toggle split/join
+      "<leader>tj", -- join
+      "<leader>ts", -- split
     },
     dependencies = {
       { "nvim-treesitter/nvim-treesitter", lazy = true, build = ":TSUpdate", branch = "main" },

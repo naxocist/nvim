@@ -25,7 +25,6 @@ return {
         end,
       })
 
-      -- Disable remote provider detection
       vim.g.loaded_python3_provider = 0
       vim.g.loaded_ruby_provider = 0
       vim.g.loaded_perl_provider = 0
@@ -37,7 +36,6 @@ return {
     ft = "lua",
     opts = {
       library = {
-        -- See the configuration section for more details
         -- Load luvit types when the `vim.uv` word is found
         { path = "${3rd}/luv/library", words = { "vim%.uv" } },
       },

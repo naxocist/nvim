@@ -1,6 +1,6 @@
-local gitGreen = "#b7ffa1"
-local gitYellow = "#f3ff85"
-local gitRed = "#ff6b6b"
+local gitGreen = "#00ff00"
+local gitYellow = "#ffff00"
+local gitRed = "#ff0000"
 
 return {
   {
@@ -9,11 +9,11 @@ return {
     priority = 500,
     config = function()
       require("vague").setup({
-        bold = true,
+        bold = false,
         italic = false,
         transparent = true,
       })
-      vim.cmd("colorscheme vague")
+      -- vim.cmd("colorscheme vague")
     end,
   },
   {
@@ -33,7 +33,7 @@ return {
           SignColumn = { bg = "none" },
         },
       })
-      -- vim.cmd("colorscheme rose-pine-moon")
+      vim.cmd("colorscheme rose-pine-moon")
     end,
   },
   {
@@ -71,7 +71,7 @@ return {
   },
   {
     "nvim-lualine/lualine.nvim",
-    enabled = false,
+    enabled = true,
     dependencies = { "nvim-tree/nvim-web-devicons" },
     opts = {
       options = {
@@ -98,13 +98,12 @@ return {
   },
   {
     "shellRaining/hlchunk.nvim",
-    enabled = false,
     event = { "BufReadPre", "BufNewFile" },
     config = function()
       require("hlchunk").setup({
         chunk = {
           enable = true,
-          style = { { fg = "#57ffff" } },
+          style = { { fg = "#555555" } },
           chars = {
             left_top = "┌",
             left_bottom = "└",
