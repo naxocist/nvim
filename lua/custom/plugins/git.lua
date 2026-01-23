@@ -69,6 +69,17 @@ return {
           map({ "o", "x" }, "ih", gitsigns.select_hunk)
         end,
       })
+
+      vim.api.nvim_set_hl(0, "GitSignsAdd", { fg = "#00FF00" })
+      vim.api.nvim_set_hl(0, "GitSignsDelete", { fg = "#FF0000" })
+      vim.api.nvim_set_hl(0, "GitSignsChange", { fg = "#FFFF00" })
+    end,
+  },
+  {
+    "tpope/vim-fugitive",
+    config = function()
+      vim.keymap.set("n", "<leader>gd", "<cmd>Gdiff<cr>")
+      vim.keymap.set("n", "<leader>gb", "<cmd>G blame<cr>")
     end,
   },
 }

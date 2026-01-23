@@ -1,7 +1,3 @@
-local gitGreen = "#00ff00"
-local gitYellow = "#ffff00"
-local gitRed = "#ff0000"
-
 return {
   {
     "vague-theme/vague.nvim",
@@ -13,7 +9,7 @@ return {
         italic = false,
         transparent = true,
       })
-      -- vim.cmd("colorscheme vague")
+      vim.cmd("colorscheme vague")
     end,
   },
   {
@@ -26,14 +22,8 @@ return {
           italic = false,
           transparency = true,
         },
-        highlight_groups = {
-          GitSignsAdd = { fg = gitGreen, bg = "none" },
-          GitSignsChange = { fg = gitYellow, bg = "none" },
-          GitSignsDelete = { fg = gitRed, bg = "none" },
-          SignColumn = { bg = "none" },
-        },
       })
-      vim.cmd("colorscheme rose-pine-moon")
+      -- vim.cmd("colorscheme rose-pine-moon")
     end,
   },
   {
@@ -90,9 +80,9 @@ return {
             file_status = true,
           },
         },
-        lualine_x = { "lsp_status" },
-        lualine_y = { "fileformat" },
-        lualine_z = { "filetype", "encoding" },
+        lualine_x = { "" },
+        lualine_y = { "" },
+        lualine_z = { "encoding" },
       },
     },
   },
