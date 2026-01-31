@@ -1,15 +1,14 @@
 return {
   {
     "Wansmer/treesj",
-    keys = {
-      "<leader>tm", -- toggle split/join
-      "<leader>tj", -- join
-      "<leader>ts", -- split
-    },
     dependencies = {
       { "nvim-treesitter/nvim-treesitter", lazy = true, build = ":TSUpdate", branch = "main" },
     },
-    opts = {},
+    config = function()
+      local tsj = require("treesj")
+      tsj.setup()
+      vim.keymap.set("n", "<leader>tm", tsj.toggle)
+    end,
   },
   {
     "nvim-treesitter/nvim-treesitter-context",

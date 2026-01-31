@@ -9,21 +9,7 @@ return {
         italic = false,
         transparent = true,
       })
-      vim.cmd("colorscheme vague")
-    end,
-  },
-  {
-    "rose-pine/neovim",
-    lazy = false,
-    priority = 1000,
-    config = function()
-      require("rose-pine").setup({
-        styles = {
-          italic = false,
-          transparency = true,
-        },
-      })
-      -- vim.cmd("colorscheme rose-pine-moon")
+      vim.cmd("color vague")
     end,
   },
   {
@@ -37,15 +23,10 @@ return {
         popupmenu = { enabled = false },
 
         lsp = {
-          override = {
-            ["vim.lsp.util.convert_input_to_markdown_lines"] = true,
-            ["vim.lsp.util.stylize_markdown"] = true,
-          },
-          hover = {
-            opts = { border = "single" },
-          },
+          hover = { opts = { border = "single" } },
           signature = {
             opts = { border = "single" },
+            auto_open = { enabled = false },
           },
         },
 
@@ -61,7 +42,6 @@ return {
   },
   {
     "nvim-lualine/lualine.nvim",
-    enabled = true,
     dependencies = { "nvim-tree/nvim-web-devicons" },
     opts = {
       options = {
@@ -80,7 +60,7 @@ return {
             file_status = true,
           },
         },
-        lualine_x = { "" },
+        lualine_x = { "lsp_status" },
         lualine_y = { "" },
         lualine_z = { "encoding" },
       },
@@ -93,12 +73,12 @@ return {
       require("hlchunk").setup({
         chunk = {
           enable = true,
-          style = { { fg = "#555555" } },
+          style = { { fg = "#333333" } },
           chars = {
             left_top = "┌",
             left_bottom = "└",
           },
-          delay = 100,
+          delay = 0,
         },
       })
     end,

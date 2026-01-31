@@ -48,27 +48,27 @@ vim.api.nvim_create_autocmd("FileType", {
 })
 
 -- set colorclumn based on ft
-vim.api.nvim_create_autocmd("FileType", {
-  pattern = "*",
-  callback = function()
-    local excluded_fts = {
-      oil = true,
-      fyler = true,
-      dbout = true,
-      typst = true,
-      markdown = true,
-      help = true,
-    }
-
-    local ft = vim.bo.filetype
-    if excluded_fts[ft] then
-      return
-    end
-
-    local col = "100"
-    vim.opt_local.colorcolumn = col
-  end,
-})
+-- vim.api.nvim_create_autocmd("FileType", {
+--   pattern = "*",
+--   callback = function()
+--     local excluded_fts = {
+--       oil = true,
+--       fyler = true,
+--       dbout = true,
+--       typst = true,
+--       markdown = true,
+--       help = true,
+--     }
+--
+--     local ft = vim.bo.filetype
+--     if excluded_fts[ft] then
+--       return
+--     end
+--
+--     local col = "100"
+--     vim.opt_local.colorcolumn = col
+--   end,
+-- })
 
 
 -- -- ide like highlight when stopping cursor

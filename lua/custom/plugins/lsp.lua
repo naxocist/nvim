@@ -22,6 +22,7 @@ return {
           vim.keymap.set("n", "<leader>wf", vim.lsp.buf.workspace_symbol, opts)
           vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts)
           vim.keymap.set("n", "gi", vim.lsp.buf.implementation, opts)
+          vim.keymap.set("i", "<C-k>", vim.lsp.buf.signature_help, opts)
         end,
       })
 
