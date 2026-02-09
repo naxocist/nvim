@@ -45,8 +45,7 @@ return {
       })
 
       vim.keymap.set("n", "<leader>e", function()
-        -- fyler.toggle({ kind = "float" })
-        fyler.toggle()
+        fyler.toggle({ kind = "float" })
       end)
     end,
   },

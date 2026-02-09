@@ -82,4 +82,9 @@ return {
       vim.keymap.set("n", "<leader>gb", "<cmd>G blame<cr>")
     end,
   },
+  {
+    "akinsho/git-conflict.nvim",
+    version = "*",
+    config = true
+  },
 }
