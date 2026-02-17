@@ -1,6 +1,4 @@
 vim.keymap.set("n", "<ESC>", ":noh<CR>")
-vim.keymap.set("n", "<C-d>", "<C-d>zz")
-vim.keymap.set("n", "<C-u>", "<C-u>zz")
 vim.keymap.set({ "n", "i" }, "<C-s>", "<ESC>:w<CR>")
 vim.keymap.set({ "n", "i" }, "<C-a>", "<ESC>gg<S-v>G")
 vim.keymap.set("v", "sy", '"+y')

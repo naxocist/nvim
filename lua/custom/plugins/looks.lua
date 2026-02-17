@@ -13,6 +13,16 @@ return {
     end,
   },
   {
+    "karb94/neoscroll.nvim",
+    config = function()
+      require("neoscroll").setup({
+        duration_multiplier = 0.5,
+      })
+      -- vim.keymap.set("n", "<C-d>", "<C-d>zz")
+      -- vim.keymap.set("n", "<C-u>", "<C-u>zz")
+    end,
+  },
+  {
     "folke/noice.nvim",
     event = "VeryLazy",
     dependencies = { "MunifTanjim/nui.nvim" },
