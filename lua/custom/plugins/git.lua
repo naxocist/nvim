@@ -70,9 +70,9 @@ return {
         end,
       })
 
-      vim.api.nvim_set_hl(0, "GitSignsAdd", { fg = "#00FF00" })
-      vim.api.nvim_set_hl(0, "GitSignsDelete", { fg = "#FF0000" })
-      vim.api.nvim_set_hl(0, "GitSignsChange", { fg = "#FFFF00" })
+      -- vim.api.nvim_set_hl(0, "GitSignsAdd", { fg = "#00FF00" })
+      -- vim.api.nvim_set_hl(0, "GitSignsDelete", { fg = "#FF0000" })
+      -- vim.api.nvim_set_hl(0, "GitSignsChange", { fg = "#FFFF00" })
     end,
   },
   {
@@ -85,6 +85,6 @@ return {
   {
     "akinsho/git-conflict.nvim",
     version = "*",
-    config = true
+    config = true,
   },
 }

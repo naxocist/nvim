@@ -5,7 +5,7 @@ return {
     priority = 500,
     config = function()
       require("vague").setup({
-        bold = false,
+        bold = true,
         italic = false,
         transparent = true,
       })
@@ -13,14 +13,33 @@ return {
     end,
   },
   {
-    "karb94/neoscroll.nvim",
-    config = function()
-      require("neoscroll").setup({
-        duration_multiplier = 0.5,
-      })
-      -- vim.keymap.set("n", "<C-d>", "<C-d>zz")
-      -- vim.keymap.set("n", "<C-u>", "<C-u>zz")
-    end,
+    "nvim-lualine/lualine.nvim",
+    dependencies = { "nvim-tree/nvim-web-devicons" },
+    opts = {
+      sections = {
+        lualine_a = { "mode" },
+        lualine_b = {
+          {
+            "filename",
+            path = 4,
+            file_status = true,
+          },
+        },
+        lualine_c = { "branch", "diff", "diagnostics" },
+        lualine_x = {},
+        lualine_y = { "lsp_status" },
+        lualine_z = {},
+      },
+      options = {
+        icons_enabled = false,
+        theme = "auto",
+        component_separators = { left = "", right = "" },
+        section_separators = { left = "", right = "" },
+        refresh = {
+          statusline = 100,
+        },
+      },
+    },
   },
   {
     "folke/noice.nvim",
@@ -33,6 +52,9 @@ return {
         popupmenu = { enabled = false },
 
         lsp = {
+          progress = {
+            enabled = false,
+          },
           hover = { opts = { border = "single" } },
           signature = {
             opts = { border = "single" },
@@ -51,39 +73,13 @@ return {
     end,
   },
   {
-    "nvim-lualine/lualine.nvim",
-    dependencies = { "nvim-tree/nvim-web-devicons" },
-    opts = {
-      options = {
-        icons_enabled = false,
-        theme = "auto",
-        component_separators = { left = "", right = "" },
-        section_separators = { left = "", right = "" },
-      },
-      sections = {
-        lualine_a = { "mode" },
-        lualine_b = { "branch", "diff", "diagnostics" },
-        lualine_c = {
-          {
-            "filename",
-            path = 4,
-            file_status = true,
-          },
-        },
-        lualine_x = { "lsp_status" },
-        lualine_y = { "" },
-        lualine_z = { "encoding" },
-      },
-    },
-  },
-  {
     "shellRaining/hlchunk.nvim",
     event = { "BufReadPre", "BufNewFile" },
     config = function()
       require("hlchunk").setup({
         chunk = {
           enable = true,
-          style = { { fg = "#333333" } },
+          style = { { fg = "#ffffff" } },
           chars = {
             left_top = "┌",
             left_bottom = "└",

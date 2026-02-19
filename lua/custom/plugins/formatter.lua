@@ -15,7 +15,7 @@ return {
             lsp_format = "fallback",
           },
           c = { "clang-format" },
-          cpp = { "clang-format" }
+          cpp = { "clang-format" },
         },
 
         notify_no_formatters = true,
