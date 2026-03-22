@@ -1,5 +1,19 @@
 return {
   {
+    "rose-pine/neovim",
+    name = "rose-pine",
+    config = function()
+      require("rose-pine").setup({
+        styles = {
+          bold = true,
+          italic = false,
+          transparency = true,
+        },
+      })
+      vim.cmd("colorscheme rose-pine-moon")
+    end,
+  },
+  {
     "y3owk1n/base16-pro-max.nvim",
     config = function()
       require("base16-pro-max").setup({
@@ -24,7 +38,7 @@ return {
         styles = { italic = false, transparency = true },
         plugins = { enable_all = true },
       })
-      vim.cmd.colorscheme("base16-pro-max")
+      -- vim.cmd.colorscheme("base16-pro-max")
     end,
   },
   {
@@ -59,7 +73,7 @@ return {
         lualine_z = {},
       },
       options = {
-        icons_enabled = false,
+        icons_enabled = true,
         theme = "powerline_dark",
         component_separators = { left = "", right = "" },
         section_separators = { left = "", right = "" },
