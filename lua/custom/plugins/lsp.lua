@@ -1,13 +1,39 @@
 return {
+  { "b0o/schemastore.nvim", lazy = true },
+  {
+    "folke/lazydev.nvim",
+    ft = "lua",
+    opts = {
+      library = {
+        { path = "${3rd}/luv/library", words = { "vim%.uv" } },
+      },
+    },
+  },
   {
     "mason-org/mason-lspconfig.nvim",
     event = { "BufReadPre", "BufNewFile" },
     dependencies = {
       { "mason-org/mason.nvim", opts = {} },
-      "neovim/nvim-lspconfig",
     },
     config = function()
       require("mason-lspconfig").setup({
+        ensure_installed = {
+          "lua_ls",
+          "clangd",
+          "rust_analyzer",
+          "ts_ls",
+          "gopls",
+          "basedpyright",
+          "svelte",
+          "jsonls",
+          "yamlls",
+          "taplo",
+          "dockerls",
+          "docker_compose_language_service",
+          "bashls",
+          "cssls",
+          "html",
+        },
         automatic_installation = true,
       })
 
@@ -22,7 +48,6 @@ return {
           vim.keymap.set("n", "<leader>wf", vim.lsp.buf.workspace_symbol, opts)
           vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts)
           vim.keymap.set("n", "gi", vim.lsp.buf.implementation, opts)
-          vim.keymap.set("i", "<C-k>", vim.lsp.buf.signature_help, opts)
         end,
       })
 

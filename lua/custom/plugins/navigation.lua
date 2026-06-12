@@ -7,8 +7,20 @@ return {
       fzf_lua.setup({
         winopts = {
           border = "single",
+          ---@diagnostic disable-next-line: missing-fields
           preview = {
             border = "single",
+          },
+        },
+        keymap = {
+          builtin = {
+            ["<C-f>"] = "preview-page-down",
+            ["<C-b>"] = "preview-page-up",
+            ["<M-w>"] = "toggle-preview-wrap", -- toggle wrap; when off, use <M-h>/<M-l> to scroll horizontally
+          },
+          fzf = {
+            ["ctrl-u"] = "half-page-up",
+            ["ctrl-d"] = "half-page-down",
           },
         },
       })
@@ -31,9 +43,11 @@ return {
           icon = "nvim_web_devicons",
         },
         views = {
+          ---@diagnostic disable-next-line: missing-fields
           finder = {
             default_explorer = true,
             confirm_simple = true,
+            ---@diagnostic disable-next-line: missing-fields
             win = {
               win_opts = {
                 number = true,

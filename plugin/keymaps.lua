@@ -2,7 +2,9 @@ vim.keymap.set("n", "<ESC>", ":noh<CR>")
 vim.keymap.set({ "n", "i" }, "<C-s>", "<ESC>:w<CR>")
 vim.keymap.set({ "n", "i" }, "<C-a>", "<ESC>gg<S-v>G")
 vim.keymap.set("v", "sy", '"+y')
-vim.keymap.set("n", "<leader>wai", "<CMD>echo expand('%:p')<CR>") -- where am i?
+
+-- where am i?
+vim.keymap.set("n", "<leader>wai", "<CMD>echo expand('%:p')<CR>")
 
 vim.keymap.set("n", "<A-j>", ":m .+1<CR>==")
 vim.keymap.set("n", "<A-k>", ":m .-2<CR>==")

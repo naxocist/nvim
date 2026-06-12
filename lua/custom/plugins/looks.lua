@@ -10,35 +10,29 @@ return {
           transparency = true,
         },
       })
-      vim.cmd("colorscheme rose-pine-moon")
+      -- vim.cmd("colorscheme rose-pine-moon")
     end,
   },
   {
-    "y3owk1n/base16-pro-max.nvim",
-    config = function()
-      require("base16-pro-max").setup({
-        colors = {
-          base00 = "#1f1f28",
-          base01 = "#2a2a37",
-          base02 = "#3a3a4e",
-          base03 = "#4e4e5e",
-          base04 = "#9e9eaf",
-          base05 = "#c5c5da",
-          base06 = "#dfdfef",
-          base07 = "#e6e6f0",
-          base08 = "#ff5f87",
-          base09 = "#ff8700",
-          base0A = "#ffaf00",
-          base0B = "#5fff87",
-          base0C = "#5fd7ff",
-          base0D = "#5fafff",
-          base0E = "#af87ff",
-          base0F = "#d7875f",
-        },
-        styles = { italic = false, transparency = true },
-        plugins = { enable_all = true },
-      })
-      -- vim.cmd.colorscheme("base16-pro-max")
+    "catppuccin/nvim",
+    name = "catppuccin",
+    lazy = false,
+    priority = 1000,
+    opts = {
+      flavour = "mocha",
+      transparent_background = true,
+      no_italic = true,
+      integrations = {
+        blink_cmp = true,
+        noice = true,
+        mason = true,
+        lualine = true,
+        treesitter = true,
+      },
+    },
+    config = function(_, opts)
+      require("catppuccin").setup(opts)
+      vim.cmd("colorscheme catppuccin")
     end,
   },
   {
@@ -74,7 +68,7 @@ return {
       },
       options = {
         icons_enabled = true,
-        theme = "powerline_dark",
+        theme = "auto",
         component_separators = { left = "", right = "" },
         section_separators = { left = "", right = "" },
         refresh = {
