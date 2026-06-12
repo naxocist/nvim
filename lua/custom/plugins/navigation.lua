@@ -32,34 +32,57 @@ return {
     end,
   },
 
+  -- {
+  --   "A7Lavinraj/fyler.nvim",
+  --   dependencies = { "nvim-tree/nvim-web-devicons" },
+  --   lazy = false,
+  --   config = function()
+  --     local fyler = require("fyler")
+  --     fyler.setup({
+  --       integrations = {
+  --         icon = "nvim_web_devicons",
+  --       },
+  --       views = {
+  --         ---@diagnostic disable-next-line: missing-fields
+  --         finder = {
+  --           default_explorer = true,
+  --           confirm_simple = true,
+  --           ---@diagnostic disable-next-line: missing-fields
+  --           win = {
+  --             win_opts = {
+  --               number = true,
+  --               relativenumber = true,
+  --             },
+  --           },
+  --         },
+  --       },
+  --     })
+  --
+  --     vim.keymap.set("n", "<leader>e", function()
+  --       fyler.toggle({ kind = "float" })
+  --     end)
+  --   end,
+  -- },
+
   {
-    "A7Lavinraj/fyler.nvim",
+    "stevearc/oil.nvim",
     dependencies = { "nvim-tree/nvim-web-devicons" },
     lazy = false,
     config = function()
-      local fyler = require("fyler")
-      fyler.setup({
-        integrations = {
-          icon = "nvim_web_devicons",
-        },
-        views = {
-          ---@diagnostic disable-next-line: missing-fields
-          finder = {
-            default_explorer = true,
-            confirm_simple = true,
-            ---@diagnostic disable-next-line: missing-fields
-            win = {
-              win_opts = {
-                number = true,
-                relativenumber = true,
-              },
-            },
-          },
+      require("oil").setup({
+        default_file_explorer = true,
+        view_options = {
+          show_hidden = true,
         },
       })
 
       vim.keymap.set("n", "<leader>e", function()
-        fyler.toggle({ kind = "float" })
+        local oil = require("oil")
+        if vim.bo.filetype == "oil" then
+          oil.close()
+        else
+          oil.open()
+        end
       end)
     end,
   },
