@@ -21,7 +21,7 @@ return {
           "lua_ls",
           "clangd",
           "rust_analyzer",
-          "ts_ls",
+          "vtsls",
           "gopls",
           "basedpyright",
           "svelte",

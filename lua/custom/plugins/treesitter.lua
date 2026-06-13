@@ -60,6 +60,7 @@ return {
         "css",
         "javascript",
         "typescript",
+        "tsx",
         "python",
         "go",
       },
