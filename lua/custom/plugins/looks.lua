@@ -14,28 +14,6 @@ return {
     end,
   },
   {
-    "catppuccin/nvim",
-    name = "catppuccin",
-    lazy = false,
-    priority = 1000,
-    opts = {
-      flavour = "mocha",
-      transparent_background = true,
-      no_italic = true,
-      integrations = {
-        blink_cmp = true,
-        noice = true,
-        mason = true,
-        lualine = true,
-        treesitter = true,
-      },
-    },
-    config = function(_, opts)
-      require("catppuccin").setup(opts)
-      vim.cmd("colorscheme catppuccin")
-    end,
-  },
-  {
     "vague-theme/vague.nvim",
     lazy = false,
     priority = 500,
@@ -45,7 +23,7 @@ return {
         italic = false,
         transparent = true,
       })
-      -- vim.cmd("color vague")
+      vim.cmd("color vague")
     end,
   },
   {
