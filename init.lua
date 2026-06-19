@@ -40,6 +40,7 @@ vim.api.nvim_create_autocmd("User", {
 		vim.keymap.set("i", "<C-s>", "<esc>", { buffer = args.data.buf_id })
 		vim.keymap.set("n", "<M-h>", "<left>",  { buffer = args.data.buf_id })
 		vim.keymap.set("n", "<M-l>", "<right>", { buffer = args.data.buf_id })
+		vim.keymap.set("n", "<leader>e", function() MiniFiles.close() end, { buffer = args.data.buf_id })
 	end,
 })
 
