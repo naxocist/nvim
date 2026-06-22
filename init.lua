@@ -41,6 +41,7 @@ vim.api.nvim_create_autocmd("User", {
 		vim.keymap.set("n", "<M-h>", "<left>",  { buffer = args.data.buf_id })
 		vim.keymap.set("n", "<M-l>", "<right>", { buffer = args.data.buf_id })
 		vim.keymap.set("n", "<leader>e", function() MiniFiles.close() end, { buffer = args.data.buf_id })
+		vim.keymap.set("n", "<CR>", function() MiniFiles.go_in({ close_on_file = true }) end, { buffer = args.data.buf_id })
 	end,
 })
 
@@ -85,41 +86,6 @@ vim.diagnostic.config({
 	severity_sort = true,
 })
 
--- LSP
-vim.lsp.config("basedpyright", {
-	settings = {
-		basedpyright = {
-			analysis = {
-				diagnosticMode = "openFilesOnly",
-				indexing = false,
-			},
-		},
-	},
-})
-
-vim.api.nvim_create_autocmd("LspAttach", {
-	callback = function(ev)
-		local m = function(k, v)
-			vim.keymap.set("n", k, v, { buffer = ev.buf, silent = true })
-		end
-		m("gd", vim.lsp.buf.definition)
-		m("gr", vim.lsp.buf.references)
-		m("K", vim.lsp.buf.hover)
-		m("<leader>rn", vim.lsp.buf.rename)
-		m("<leader>ca", vim.lsp.buf.code_action)
-		m("<leader>f", function()
-			vim.lsp.buf.format({ async = true })
-		end)
-		m("[d", function()
-			vim.diagnostic.jump({ count = -1 })
-		end)
-		m("]d", function()
-			vim.diagnostic.jump({ count = 1 })
-		end)
-		m("<leader>d", vim.diagnostic.open_float)
-	end,
-})
-
 -- LAZY.NVIM BOOTSTRAP
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then
@@ -134,105 +100,6 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
-require("lazy").setup({
-	{
-		"saghen/blink.cmp",
-		version = "*",
-		dependencies = { "rafamadriz/friendly-snippets" },
-		opts = {
-			keymap = {
-				preset = "enter",
-				["<C-y>"] = { "show", "fallback" },
-				["<C-j>"] = { "select_next", "fallback" },
-				["<C-k>"] = { "select_prev", "fallback" },
-			},
-			completion = { menu = { auto_show = true } },
-			snippets = { preset = "mini_snippets" },
-			sources = {
-				default = { "lazydev", "lsp", "path", "snippets", "buffer" },
-				providers = {
-					lazydev = {
-						name = "LazyDev",
-						module = "lazydev.integrations.blink",
-						score_offset = 100,
-					},
-				},
-			},
-		},
-	},
-	{ "folke/lazydev.nvim", ft = "lua", opts = {} },
-	{
-		"mason-org/mason-lspconfig.nvim",
-		opts = {},
-		dependencies = {
-			{ "mason-org/mason.nvim", opts = {} },
-			"neovim/nvim-lspconfig",
-		},
-	},
-	{
-		"nvim-treesitter/nvim-treesitter",
-		build = ":TSUpdate",
-		config = function()
-			require("nvim-treesitter").setup({
-				ensure_installed = { "lua", "python", "javascript", "typescript", "bash", "json", "yaml", "c" },
-				auto_install = true,
-				highlight = { enable = true },
-				indent = { enable = true },
-			})
-		end,
-	},
-	{
-		"echasnovski/mini.nvim",
-		version = "*",
-		config = function()
-			require("mini.icons").setup()
-			require("mini.snippets").setup({
-				snippets = { require("mini.snippets").gen_loader.from_lang() },
-			})
-			require("mini.pick").setup({
-				mappings = {
-					move_down = "<C-j>",
-					move_up = "<C-k>",
-				},
-			})
-			require("mini.files").setup()
-			require("mini.surround").setup()
-			require("mini.pairs").setup()
-			require("mini.git").setup()
-			require("mini.diff").setup({
-				view = {
-					style = "sign",
-					signs = { add = "+", change = "~", delete = "-" },
-				},
-			})
-			require("mini.base16").setup({
-				palette = {
-					base00 = "#111111",
-					base01 = "#1a1a1a",
-					base02 = "#222222",
-					base03 = "#6e6a86",
-					base04 = "#908caa",
-					base05 = "#e0def4",
-					base06 = "#e0def4",
-					base07 = "#f7f3f3",
-					base08 = "#eb6f92",
-					base09 = "#f6c177",
-					base0A = "#ea9a97",
-					base0B = "#3e8fb0",
-					base0C = "#9ccfd8",
-					base0D = "#c4a7e7",
-					base0E = "#f6c177",
-					base0F = "#56526e",
-				},
-			})
-			vim.api.nvim_set_hl(0, "MiniDiffSignAdd", { fg = "#587c0c" })
-			vim.api.nvim_set_hl(0, "MiniDiffSignChange", { fg = "#0c7d9d" })
-			vim.api.nvim_set_hl(0, "MiniDiffSignDelete", { fg = "#94151b" })
-			vim.api.nvim_set_hl(0, "MiniDiffOverAdd",       { bg = "#1e4620" })
-			vim.api.nvim_set_hl(0, "MiniDiffOverChange",    { bg = "#3d3000" })
-			vim.api.nvim_set_hl(0, "MiniDiffOverChangeBuf", { bg = "#3d3000" })
-			vim.api.nvim_set_hl(0, "MiniDiffOverDelete",    { bg = "#5c1111" })
-			require("mini.statusline").setup()
-		end,
-	},
+require("lazy").setup("plugins", {
+	change_detection = { enabled = true, notify = true },
 })
