@@ -26,24 +26,9 @@ vim.opt.winborder = "single"
 vim.opt.list = true
 vim.opt.listchars = { tab = "▏ ", trail = "·", extends = ">", precedes = "<" }
 
-vim.api.nvim_create_autocmd("FileType", {
-	pattern = "qf",
-	callback = function()
-		vim.keymap.set("n", "<CR>", "<CR><C-w>p", { buffer = true, silent = true })
-	end,
-})
-
--- highlight on yank
-vim.api.nvim_create_autocmd("TextYankPost", {
-	group = vim.api.nvim_create_augroup("highlight_yank", { clear = true }),
-	callback = function()
-		vim.highlight.on_yank()
-	end,
-})
-
 -- KEYMAPS
 local map = function(m, k, v)
-	vim.keymap.set(m, k, v, { silent = true })
+  vim.keymap.set(m, k, v, { silent = true })
 end
 
 vim.keymap.set("n", "j", "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
@@ -63,38 +48,56 @@ map("n", "<M-s>", "<cmd>resize -5<cr>")
 map("n", "<M-t>", "<cmd>resize +5<cr>")
 map("n", "<M-,>", "<cmd>vertical resize -5<cr>")
 map("n", "<M-.>", "<cmd>vertical resize +5<cr>")
+map({ "n", "i" }, "<C-a>", "<esc>ggVG")
 map("n", "<leader>gg", function()
-	vim.cmd("botright 60split | terminal lazygit")
-	vim.cmd("startinsert")
+  vim.cmd("botright 60split | terminal lazygit")
+  vim.cmd("startinsert")
 end)
 map("n", "<leader>td", function()
-	diag_current_line = not diag_current_line
-	vim.diagnostic.config({ virtual_text = diag_current_line })
+  diag_current_line = not diag_current_line
+  vim.diagnostic.config({ virtual_text = diag_current_line })
 end)
 
 -- DIAGNOSTICS
 vim.diagnostic.config({
-	virtual_text = true,
-	virtual_lines = false,
-	signs = true,
-	underline = true,
-	severity_sort = true,
+  virtual_text = true,
+  virtual_lines = false,
+  signs = true,
+  underline = true,
+  severity_sort = true,
+})
+
+-- AUTOCMDS
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = "qf",
+  callback = function()
+    vim.keymap.set("n", "<CR>", "<CR><C-w>p", { buffer = true, silent = true })
+  end,
+})
+
+-- highlight on yank
+vim.api.nvim_set_hl(0, "YankFlash", { bg = "#f6c177", fg = "#111111" })
+vim.api.nvim_create_autocmd("TextYankPost", {
+  group = vim.api.nvim_create_augroup("highlight_yank", { clear = true }),
+  callback = function()
+    vim.highlight.on_yank({ higroup = "YankFlash", timeout = 150 })
+  end,
 })
 
 -- LAZY.NVIM BOOTSTRAP
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then
-	vim.fn.system({
-		"git",
-		"clone",
-		"--filter=blob:none",
-		"https://github.com/folke/lazy.nvim.git",
-		"--branch=stable",
-		lazypath,
-	})
+  vim.fn.system({
+    "git",
+    "clone",
+    "--filter=blob:none",
+    "https://github.com/folke/lazy.nvim.git",
+    "--branch=stable",
+    lazypath,
+  })
 end
 vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup("plugins", {
-	change_detection = { enabled = true, notify = true },
+  change_detection = { enabled = true, notify = false },
 })
