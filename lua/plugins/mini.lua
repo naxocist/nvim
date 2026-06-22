@@ -51,6 +51,24 @@ return {
       vim.api.nvim_set_hl(0, "MiniDiffOverChangeBuf", { bg = "#3d3000" })
       vim.api.nvim_set_hl(0, "MiniDiffOverDelete",    { bg = "#5c1111" })
       require("mini.statusline").setup()
+
+      local map = function(m, k, v) vim.keymap.set(m, k, v, { silent = true }) end
+      map("n", "<leader>e", function() MiniFiles.open() end)
+      map("n", "<C-p>", function() MiniPick.builtin.files() end)
+      map("n", "<C-g>", function() MiniPick.builtin.grep_live() end)
+      map("n", "<leader>gs", function() MiniGit.show_at_cursor() end)
+      map("n", "<leader>gd", function() MiniDiff.toggle_overlay() end)
+
+      vim.api.nvim_create_autocmd("User", {
+        pattern = "MiniFilesBufferCreate",
+        callback = function(args)
+          vim.keymap.set("i", "<C-s>", "<esc>", { buffer = args.data.buf_id })
+          vim.keymap.set("n", "<M-h>", "<left>",  { buffer = args.data.buf_id })
+          vim.keymap.set("n", "<M-l>", "<right>", { buffer = args.data.buf_id })
+          vim.keymap.set("n", "<leader>e", function() MiniFiles.close() end, { buffer = args.data.buf_id })
+          vim.keymap.set("n", "<CR>", function() MiniFiles.go_in({ close_on_file = true }) end, { buffer = args.data.buf_id })
+        end,
+      })
     end,
   },
 }

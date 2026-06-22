@@ -26,6 +26,13 @@ vim.opt.winborder = "single"
 vim.opt.list = true
 vim.opt.listchars = { tab = "▏ ", trail = "·", extends = ">", precedes = "<" }
 
+vim.api.nvim_create_autocmd("FileType", {
+	pattern = "qf",
+	callback = function()
+		vim.keymap.set("n", "<CR>", "<CR><C-w>p", { buffer = true, silent = true })
+	end,
+})
+
 -- highlight on yank
 vim.api.nvim_create_autocmd("TextYankPost", {
 	group = vim.api.nvim_create_augroup("highlight_yank", { clear = true }),
@@ -34,25 +41,11 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 	end,
 })
 
-vim.api.nvim_create_autocmd("User", {
-	pattern = "MiniFilesBufferCreate",
-	callback = function(args)
-		vim.keymap.set("i", "<C-s>", "<esc>", { buffer = args.data.buf_id })
-		vim.keymap.set("n", "<M-h>", "<left>",  { buffer = args.data.buf_id })
-		vim.keymap.set("n", "<M-l>", "<right>", { buffer = args.data.buf_id })
-		vim.keymap.set("n", "<leader>e", function() MiniFiles.close() end, { buffer = args.data.buf_id })
-		vim.keymap.set("n", "<CR>", function() MiniFiles.go_in({ close_on_file = true }) end, { buffer = args.data.buf_id })
-	end,
-})
-
 -- KEYMAPS
 local map = function(m, k, v)
 	vim.keymap.set(m, k, v, { silent = true })
 end
 
-map("n", "<leader>e", "<cmd>lua MiniFiles.open()<cr>")
-map("n", "<C-p>", "<cmd>lua MiniPick.builtin.files()<cr>")
-map("n", "<C-g>", "<cmd>lua MiniPick.builtin.grep_live()<cr>")
 vim.keymap.set("n", "j", "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
 vim.keymap.set("n", "k", "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
 map("n", "<C-d>", "<C-d>zz")
@@ -66,12 +59,14 @@ map("v", "K", ":m '<-2<CR>gv=gv")
 map({ "n", "i" }, "<C-s>", "<cmd>w<cr><esc>")
 map("n", "<leader>q", "<cmd>q<cr>")
 map({ "n", "i" }, "<esc>", "<esc><cmd>nohl<cr>")
-map("n", "<leader>gs", "<cmd>lua MiniGit.show_at_cursor()<cr>")
+map("n", "<M-s>", "<cmd>resize -5<cr>")
+map("n", "<M-t>", "<cmd>resize +5<cr>")
+map("n", "<M-,>", "<cmd>vertical resize -5<cr>")
+map("n", "<M-.>", "<cmd>vertical resize +5<cr>")
 map("n", "<leader>gg", function()
 	vim.cmd("botright 60split | terminal lazygit")
 	vim.cmd("startinsert")
 end)
-map("n", "<leader>gd", "<cmd>lua MiniDiff.toggle_overlay()<cr>")
 map("n", "<leader>td", function()
 	diag_current_line = not diag_current_line
 	vim.diagnostic.config({ virtual_text = diag_current_line })
