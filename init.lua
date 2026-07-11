@@ -58,7 +58,8 @@ map("n", "<leader>td", function()
   diag_current_line = not diag_current_line
   vim.diagnostic.config({ virtual_text = diag_current_line })
 end)
-map("n", "<leader>e", function() vim.cmd("Explore") end)
+vim.g.netrw_liststyle = 3
+
 
 -- DIAGNOSTICS
 vim.diagnostic.config({
