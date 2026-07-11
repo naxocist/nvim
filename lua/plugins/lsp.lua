@@ -1,7 +1,6 @@
 return {
   {
     "mason-org/mason-lspconfig.nvim",
-    opts = {},
     dependencies = {
       { "mason-org/mason.nvim", opts = {} },
       "neovim/nvim-lspconfig",
@@ -28,17 +27,8 @@ return {
           end
           m("gd", vim.lsp.buf.definition)
           m("gr", vim.lsp.buf.references)
-          m("K", vim.lsp.buf.hover)
-          m("<leader>rn", vim.lsp.buf.rename)
-          m("<leader>ca", vim.lsp.buf.code_action)
           m("<leader>f", function()
             vim.lsp.buf.format({ async = true })
-          end)
-          m("[d", function()
-            vim.diagnostic.jump({ count = -1 })
-          end)
-          m("]d", function()
-            vim.diagnostic.jump({ count = 1 })
           end)
           m("<leader>d", vim.diagnostic.open_float)
         end,

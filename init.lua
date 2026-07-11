@@ -17,7 +17,7 @@ vim.opt.syntax = "on"
 vim.opt.termguicolors = true
 vim.opt.scrolloff = 8
 vim.opt.signcolumn = "yes"
-vim.opt.clipboard = "unnamedplus"
+vim.opt.colorcolumn = "80"
 vim.opt.undofile = true
 vim.opt.updatetime = 250
 vim.opt.splitright = true
@@ -25,6 +25,7 @@ vim.opt.splitbelow = true
 vim.opt.winborder = "single"
 vim.opt.list = true
 vim.opt.listchars = { tab = "▏ ", trail = "·", extends = ">", precedes = "<" }
+vim.opt.cursorline = true
 
 -- KEYMAPS
 local map = function(m, k, v)
@@ -57,6 +58,7 @@ map("n", "<leader>td", function()
   diag_current_line = not diag_current_line
   vim.diagnostic.config({ virtual_text = diag_current_line })
 end)
+map("n", "<leader>e", function() vim.cmd("Explore") end)
 
 -- DIAGNOSTICS
 vim.diagnostic.config({
@@ -67,22 +69,6 @@ vim.diagnostic.config({
   severity_sort = true,
 })
 
--- AUTOCMDS
-vim.api.nvim_create_autocmd("FileType", {
-  pattern = "qf",
-  callback = function()
-    vim.keymap.set("n", "<CR>", "<CR><C-w>p", { buffer = true, silent = true })
-  end,
-})
-
--- highlight on yank
-vim.api.nvim_set_hl(0, "YankFlash", { bg = "#f6c177", fg = "#111111" })
-vim.api.nvim_create_autocmd("TextYankPost", {
-  group = vim.api.nvim_create_augroup("highlight_yank", { clear = true }),
-  callback = function()
-    vim.highlight.on_yank({ higroup = "YankFlash", timeout = 150 })
-  end,
-})
 
 -- LAZY.NVIM BOOTSTRAP
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
