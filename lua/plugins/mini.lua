@@ -31,7 +31,6 @@ return {
       end)
 
       require("mini.files").setup({})
-      require("minifiles_git")
       map("n", "<leader>e", MiniFiles.open)
       vim.api.nvim_create_autocmd("User", {
         pattern = "MiniFilesBufferCreate",

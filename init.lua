@@ -25,7 +25,7 @@ vim.opt.splitbelow = true
 vim.opt.winborder = "single"
 vim.opt.list = true
 vim.opt.listchars = { tab = "▏ ", trail = "·", extends = ">", precedes = "<" }
-vim.opt.cursorline = true
+vim.opt.cursorline = false
 
 -- KEYMAPS
 local map = function(m, k, v)
@@ -60,6 +60,7 @@ map("n", "<leader>td", function()
 end)
 vim.g.netrw_liststyle = 3
 
+vim.g.python3_host_prog = "/usr/bin/python3"
 
 -- DIAGNOSTICS
 vim.diagnostic.config({

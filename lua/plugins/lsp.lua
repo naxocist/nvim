@@ -9,17 +9,6 @@ return {
       require("mason").setup()
       require("mason-lspconfig").setup(opts)
 
-      vim.lsp.config("basedpyright", {
-        settings = {
-          basedpyright = {
-            analysis = {
-              diagnosticMode = "openFilesOnly",
-              indexing = false,
-            },
-          },
-        },
-      })
-
       vim.api.nvim_create_autocmd("LspAttach", {
         callback = function(ev)
           local m = function(k, v)
